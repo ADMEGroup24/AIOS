@@ -14,7 +14,7 @@
 body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
 header{padding:28px 20px 16px;border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:5}
 .header-inner{max-width:1220px;margin:auto;display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-h1{font-size:28px;margin:0}.sub{color:var(--muted);font-size:13px;margin-top:4px}
+h1{font-size:28px;margin:0}.sub{color:var(--muted);font-size:13px;margin-top:4px}.live-badge{display:inline-block;margin-top:8px;padding:4px 8px;border-radius:999px;background:var(--green-bg);color:var(--green);border:1px solid #b9ddce;font-size:11px;font-weight:700}
 .actions{display:flex;gap:8px;flex-wrap:wrap}
 button,.btn{border:1px solid var(--line);background:#fff;color:var(--text);padding:9px 12px;border-radius:9px;cursor:pointer;font-size:13px}
 button.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
@@ -66,6 +66,7 @@ dialog::backdrop{background:rgba(17,30,45,.4)}
     <div>
       <h1>ADME AI Operating System</h1>
       <div class="sub">Living map of company workflows, skills, gaps and handoffs</div>
+      <div class="live-badge">Live architecture · v0.2</div>
     </div>
     <div class="actions">
       <button id="addSkill">Add skill</button>
