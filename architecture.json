@@ -1,10 +1,10 @@
 {
-  "version": "0.3.0",
+  "version": "0.6.0",
   "title": "ADME ChatGPT AI Operating System",
   "root": {
     "name": "ADME",
     "subtitle": "ChatGPT AI Operating System",
-    "description": "Company mind map of current AI capabilities, workflows, skills, planned capabilities and assumed gaps."
+    "description": "Company mind map of current AI capabilities, executable workflows, skills, planned capabilities and assumed gaps."
   },
   "branches": [
     {
@@ -19,66 +19,79 @@
           "name": "White Papers & Client Communication",
           "kind": "capability",
           "status": "current",
-          "description": "Current validated workflow area.",
+          "description": "White paper and related client communication workflows.",
           "children": [
             {
               "name": "White Paper Cycle",
               "kind": "workflow",
               "status": "current",
-              "description": "Project progress and previous feedback feed strategy, writing, the client meeting and the next feedback cycle.",
+              "description": "A functional workflow launcher. Each visible step either opens the relevant ChatGPT skill or identifies a skill that still needs to be built.",
+              "note": "The detailed business process remains part of the architecture, but the visible map is intentionally simplified into executable workflow steps.",
               "children": [
                 {
-                  "name": "1. Project Progress",
-                  "kind": "process",
+                  "name": "1. Start White Paper",
+                  "kind": "launcher",
                   "status": "gap",
-                  "description": "Engineering updates, ClickUp, Drive, milestones, risks, images and evidence.",
-                  "note": "No dedicated skill has been established. This may remain source-driven rather than becoming a skill."
+                  "step": 1,
+                  "requiredSkill": "Dedicated Project Progress / White Paper Intake skill",
+                  "description": "Start a new white paper case, identify the project, collect the current engineering and delivery state, and gather the approved source material required for the cycle.",
+                  "handoff": "Current Project Evidence Pack -> Previous Meeting Feedback",
+                  "note": "Skill needed. The current architecture does not yet have a dedicated intake skill for this responsibility."
                 },
                 {
                   "name": "2. Previous Meeting Feedback",
-                  "kind": "process",
-                  "status": "planned",
-                  "description": "Carry forward client decisions, corrections, questions, commitments, priorities and open items.",
-                  "children": [
-                    {"skill": "adme-client-communication"}
-                  ]
+                  "kind": "launcher",
+                  "status": "gap",
+                  "step": 2,
+                  "skillId": "adme-client-communication",
+                  "requiredSkill": "ADME Client Communication",
+                  "description": "Carry forward the client's decisions, corrections, questions, commitments, priorities and unresolved matters from the previous meeting.",
+                  "handoff": "Client Feedback Pack + Current Project Evidence Pack -> White Paper Strategy",
+                  "note": "Skill needed. ADME Client Communication is a planned capability and is not yet available for launch."
                 },
                 {
                   "name": "3. White Paper Strategy",
-                  "kind": "process",
-                  "status": "current",
-                  "description": "Decide what changed, what matters now, what can be claimed and what the paper must achieve.",
-                  "children": [
-                    {"skill": "adme-white-paper-strategist"}
-                  ]
+                  "kind": "launcher",
+                  "status": "core",
+                  "step": 3,
+                  "skillId": "adme-white-paper-strategist",
+                  "description": "Reset the truth, determine what changed, decide what matters now, define safe claims, shape the reading architecture, and produce the approved strategy pack.",
+                  "handoff": "Approved White Paper Strategy Pack -> White Paper Writing",
+                  "launchPrompt": "@ADME White Paper Strategist Start the White Paper Strategy step for a new ADME white paper cycle. First ask me which project and white paper this is for. Then ask for the approved source material, file dump, project progress evidence, and previous client feedback you need. Follow the ADME White Paper Strategist skill. Do not draft the full white paper. Finish by producing a controlled Strategy Pack and a concise handoff for the White Paper Writing step."
                 },
                 {
                   "name": "4. White Paper Writing",
-                  "kind": "process",
+                  "kind": "launcher",
                   "status": "refactor",
-                  "description": "Turn approved strategy and evidence into the client-facing technical narrative and Way Forward.",
-                  "children": [
-                    {"skill": "client-technical-planner"},
-                    {"skill": "adme-white-paper-writer"}
-                  ]
+                  "step": 4,
+                  "skillId": "client-technical-planner",
+                  "targetSkill": "ADME White Paper Writer",
+                  "description": "Turn the approved strategy and evidence into the client-facing technical narrative, progress story, evidence-backed reasoning and Way Forward.",
+                  "handoff": "Draft / reviewed White Paper -> Client Meeting preparation",
+                  "note": "Launches the current Client Technical Planner skill. A focused ADME White Paper Writer remains the preferred target architecture.",
+                  "launchPrompt": "@Client Technical Planner Continue the ADME White Paper Cycle at the White Paper Writing step. Use the approved White Paper Strategy Pack and its evidence boundaries as the controlling input. Ask me for the Strategy Pack and source material if they are not already available. Draft the client-facing technical narrative, progress explanation, evidence-backed reasoning and Way Forward without redefining client intent or approved claims. Finish with a concise handoff for Client Meeting preparation."
                 },
                 {
                   "name": "5. Client Meeting",
-                  "kind": "process",
-                  "status": "planned",
-                  "description": "Present progress, explain direction, clarify issues and move decisions forward.",
-                  "children": [
-                    {"skill": "adme-client-communication"}
-                  ]
+                  "kind": "launcher",
+                  "status": "gap",
+                  "step": 5,
+                  "skillId": "adme-client-communication",
+                  "requiredSkill": "ADME Client Communication",
+                  "description": "Prepare the meeting objective, talking points, decisions needed, questions, unresolved matters and claims that should not be made.",
+                  "handoff": "Meeting preparation -> Client Meeting -> Capture Client Feedback",
+                  "note": "Skill needed. This responsibility is intended to sit within ADME Client Communication."
                 },
                 {
                   "name": "6. Capture Client Feedback",
-                  "kind": "process",
-                  "status": "planned",
-                  "description": "Capture confirmed, changed, rejected, deferred, questioned and unresolved items.",
-                  "children": [
-                    {"skill": "adme-client-communication"}
-                  ]
+                  "kind": "launcher",
+                  "status": "gap",
+                  "step": 6,
+                  "skillId": "adme-client-communication",
+                  "requiredSkill": "ADME Client Communication",
+                  "description": "Capture what the client confirmed, changed, rejected, deferred, questioned, committed to or left unresolved.",
+                  "handoff": "Client Feedback Record -> next White Paper Cycle",
+                  "note": "Skill needed. The completed feedback record becomes the controlled input to the next cycle."
                 }
               ]
             }
@@ -94,37 +107,10 @@
       "status": "current",
       "description": "Existing portfolio, CMS and system administration capabilities.",
       "children": [
-        {
-          "name": "Portfolio Story Development",
-          "kind": "workflow",
-          "status": "current",
-          "children": [
-            {"skill": "portfolio-project-manager"}
-          ]
-        },
-        {
-          "name": "Portfolio CMS & Publishing",
-          "kind": "workflow",
-          "status": "current",
-          "children": [
-            {"skill": "portfolio-webmaster"}
-          ]
-        },
-        {
-          "name": "Perfect Fit System Administration",
-          "kind": "workflow",
-          "status": "current",
-          "children": [
-            {"skill": "perfect-fit-super-admin"}
-          ]
-        },
-        {
-          "name": "ADME Corporate Web Management",
-          "kind": "gap",
-          "status": "gap",
-          "description": "Placeholder for company website and digital presence management if ADME decides this should become an AI-supported workflow.",
-          "note": "Assumed gap. Workflow not yet audited."
-        }
+        {"name": "Portfolio Story Development", "kind": "workflow", "status": "current", "children": [{"skill": "portfolio-project-manager"}]},
+        {"name": "Portfolio CMS & Publishing", "kind": "workflow", "status": "current", "children": [{"skill": "portfolio-webmaster"}]},
+        {"name": "Perfect Fit System Administration", "kind": "workflow", "status": "current", "children": [{"skill": "perfect-fit-super-admin"}]},
+        {"name": "ADME Corporate Web Management", "kind": "gap", "status": "gap", "description": "Placeholder for company website and digital presence management if ADME decides this should become an AI-supported workflow.", "note": "Skill needed if this is confirmed as a repeatable AI responsibility. Workflow not yet audited."}
       ]
     },
     {
@@ -135,38 +121,10 @@
       "status": "current",
       "description": "Existing career and opportunity capabilities currently represented in the skill library.",
       "children": [
-        {
-          "name": "Opportunity Management",
-          "kind": "workflow",
-          "status": "current",
-          "children": [
-            {"skill": "opportunity-assistant-manager"}
-          ]
-        },
-        {
-          "name": "Job & Freelance Applications",
-          "kind": "workflow",
-          "status": "current",
-          "children": [
-            {"skill": "roshan-job-application-workflow"}
-          ]
-        },
-        {
-          "name": "Cover Letter Production",
-          "kind": "workflow",
-          "status": "current",
-          "children": [
-            {"skill": "roshan-cover-letter"}
-          ]
-        },
-        {
-          "name": "CV & Resume Production",
-          "kind": "workflow",
-          "status": "current",
-          "children": [
-            {"skill": "indesign-cv-refiner"}
-          ]
-        }
+        {"name": "Opportunity Management", "kind": "workflow", "status": "current", "children": [{"skill": "opportunity-assistant-manager"}]},
+        {"name": "Job & Freelance Applications", "kind": "workflow", "status": "current", "children": [{"skill": "roshan-job-application-workflow"}]},
+        {"name": "Cover Letter Production", "kind": "workflow", "status": "current", "children": [{"skill": "roshan-cover-letter"}]},
+        {"name": "CV & Resume Production", "kind": "workflow", "status": "current", "children": [{"skill": "indesign-cv-refiner"}]}
       ]
     },
     {
@@ -176,14 +134,14 @@
       "kind": "capability",
       "status": "gap",
       "description": "Reserved company management area. These nodes are hypotheses until ADME audits the real workflows.",
-      "note": "Assumed gap branch. These boxes do not imply that a dedicated skill should be created.",
+      "note": "Assumed gap branch. A skill should only be created after the real responsibility and handoff are confirmed.",
       "children": [
-        {"name": "Organizational Management", "kind": "gap", "status": "gap", "description": "Leadership, priorities, operating rhythm and organizational coordination.", "note": "Assumed gap. Workflow not yet audited."},
-        {"name": "Project & Resource Management", "kind": "gap", "status": "gap", "description": "Portfolio visibility, resource coordination, project governance and delivery oversight.", "note": "Assumed gap. Workflow not yet audited."},
-        {"name": "People & HR Operations", "kind": "gap", "status": "gap", "description": "People administration, onboarding, performance, hiring and internal team processes.", "note": "Assumed gap. Workflow not yet audited."},
-        {"name": "Finance & Administration", "kind": "gap", "status": "gap", "description": "Finance, administration, approvals and management reporting.", "note": "Assumed gap. Workflow not yet audited."},
-        {"name": "Knowledge & SOP Management", "kind": "gap", "status": "gap", "description": "Company knowledge, operating procedures, document ownership and controlled updates.", "note": "Assumed gap. Workflow not yet audited."},
-        {"name": "Internal Reporting & Decision Support", "kind": "gap", "status": "gap", "description": "Leadership reporting, summaries, decision preparation and follow-through.", "note": "Assumed gap. Workflow not yet audited."}
+        {"name": "Organizational Management", "kind": "gap", "status": "gap", "description": "Leadership, priorities, operating rhythm and organizational coordination.", "note": "Skill needed if this is confirmed as a repeatable AI responsibility. Workflow not yet audited."},
+        {"name": "Project & Resource Management", "kind": "gap", "status": "gap", "description": "Portfolio visibility, resource coordination, project governance and delivery oversight.", "note": "Skill needed if this is confirmed as a repeatable AI responsibility. Workflow not yet audited."},
+        {"name": "People & HR Operations", "kind": "gap", "status": "gap", "description": "People administration, onboarding, performance, hiring and internal team processes.", "note": "Skill needed if this is confirmed as a repeatable AI responsibility. Workflow not yet audited."},
+        {"name": "Finance & Administration", "kind": "gap", "status": "gap", "description": "Finance, administration, approvals and management reporting.", "note": "Skill needed if this is confirmed as a repeatable AI responsibility. Workflow not yet audited."},
+        {"name": "Knowledge & SOP Management", "kind": "gap", "status": "gap", "description": "Company knowledge, operating procedures, document ownership and controlled updates.", "note": "Skill needed if this is confirmed as a repeatable AI responsibility. Workflow not yet audited."},
+        {"name": "Internal Reporting & Decision Support", "kind": "gap", "status": "gap", "description": "Leadership reporting, summaries, decision preparation and follow-through.", "note": "Skill needed if this is confirmed as a repeatable AI responsibility. Workflow not yet audited."}
       ]
     },
     {
@@ -194,18 +152,11 @@
       "status": "current",
       "description": "Current skill coverage exists, but the end-to-end business workflow has not yet been mapped.",
       "children": [
-        {
-          "name": "Technical Planning & Narrative",
-          "kind": "workflow",
-          "status": "refactor",
-          "children": [
-            {"skill": "client-technical-planner"}
-          ]
-        },
-        {"name": "Engineering Workflow & Delivery", "kind": "gap", "status": "gap", "description": "End-to-end engineering delivery workflow, milestones, ownership and handoffs.", "note": "Assumed gap until the Engineering & Technical Delivery workflow is audited."},
-        {"name": "Requirements & Technical Decisions", "kind": "gap", "status": "gap", "description": "Requirements capture, design decisions, trade-offs and decision history.", "note": "Assumed gap until the engineering workflow is audited."},
-        {"name": "Test, Validation & Evidence", "kind": "gap", "status": "gap", "description": "Test planning, validation evidence, technical proof and controlled results.", "note": "Assumed gap until the engineering workflow is audited."},
-        {"name": "Engineering Knowledge Capture", "kind": "gap", "status": "gap", "description": "Reusable technical knowledge, lessons learned and project evidence capture.", "note": "Assumed gap until the engineering workflow is audited."}
+        {"name": "Technical Planning & Narrative", "kind": "workflow", "status": "refactor", "children": [{"skill": "client-technical-planner"}]},
+        {"name": "Engineering Workflow & Delivery", "kind": "gap", "status": "gap", "description": "End-to-end engineering delivery workflow, milestones, ownership and handoffs.", "note": "Skill needed if confirmed after the Engineering & Technical Delivery workflow audit."},
+        {"name": "Requirements & Technical Decisions", "kind": "gap", "status": "gap", "description": "Requirements capture, design decisions, trade-offs and decision history.", "note": "Skill needed if confirmed after the Engineering & Technical Delivery workflow audit."},
+        {"name": "Test, Validation & Evidence", "kind": "gap", "status": "gap", "description": "Test planning, validation evidence, technical proof and controlled results.", "note": "Skill needed if confirmed after the Engineering & Technical Delivery workflow audit."},
+        {"name": "Engineering Knowledge Capture", "kind": "gap", "status": "gap", "description": "Reusable technical knowledge, lessons learned and project evidence capture.", "note": "Skill needed if confirmed after the Engineering & Technical Delivery workflow audit."}
       ]
     },
     {
@@ -235,9 +186,9 @@
         {"name": "Workflow Architecture", "kind": "workflow", "status": "current", "children": [{"skill": "ai-workflow-architect"}]},
         {"name": "Skill Design & Maintenance", "kind": "workflow", "status": "current", "children": [{"skill": "skill-creator"}]},
         {"name": "Structured Intake", "kind": "support", "status": "shared", "children": [{"skill": "adme-quizzer"}]},
-        {"name": "Skill QA & Approval", "kind": "gap", "status": "gap", "description": "Testing, acceptance criteria and approval before company-wide skill use.", "note": "Known governance topic, but no dedicated capability has been standardized."},
-        {"name": "AIOS Governance & Change Control", "kind": "gap", "status": "gap", "description": "Ownership, versioning, architecture approvals and controlled change management.", "note": "Known governance topic, but the operating workflow is not yet standardized."},
-        {"name": "Access, Security & Usage Monitoring", "kind": "gap", "status": "gap", "description": "Access boundaries, security rules, adoption visibility and operational monitoring.", "note": "Known SOP topic, but workflow and ownership are not yet standardized."}
+        {"name": "Skill QA & Approval", "kind": "gap", "status": "gap", "description": "Testing, acceptance criteria and approval before company-wide skill use.", "note": "Skill needed if ADME decides this responsibility requires a dedicated reusable capability."},
+        {"name": "AIOS Governance & Change Control", "kind": "gap", "status": "gap", "description": "Ownership, versioning, architecture approvals and controlled change management.", "note": "Skill needed if ADME decides this responsibility requires a dedicated reusable capability."},
+        {"name": "Access, Security & Usage Monitoring", "kind": "gap", "status": "gap", "description": "Access boundaries, security rules, adoption visibility and operational monitoring.", "note": "Skill needed if ADME decides this responsibility requires a dedicated reusable capability."}
       ]
     },
     {
@@ -249,10 +200,10 @@
       "description": "Reserved commercial capability area. These nodes are hypotheses until ADME maps the real business process.",
       "note": "Assumed gap branch. No current skill ownership is asserted.",
       "children": [
-        {"name": "Sales & Business Development", "kind": "gap", "status": "gap", "description": "Lead generation, qualification, relationship development and opportunity progression.", "note": "Assumed gap. Workflow not yet audited."},
-        {"name": "Marketing & Brand", "kind": "gap", "status": "gap", "description": "Brand, campaigns, content and market communication.", "note": "Assumed gap. Workflow not yet audited."},
-        {"name": "Proposals & Commercial Offers", "kind": "gap", "status": "gap", "description": "Proposal development, commercial positioning, offer preparation and handoff.", "note": "Assumed gap. Workflow not yet audited."},
-        {"name": "CRM & Client Pipeline", "kind": "gap", "status": "gap", "description": "Pipeline visibility, client records, follow-ups and opportunity status.", "note": "Assumed gap. Workflow not yet audited."}
+        {"name": "Sales & Business Development", "kind": "gap", "status": "gap", "description": "Lead generation, qualification, relationship development and opportunity progression.", "note": "Skill needed if this is confirmed as a repeatable AI responsibility. Workflow not yet audited."},
+        {"name": "Marketing & Brand", "kind": "gap", "status": "gap", "description": "Brand, campaigns, content and market communication.", "note": "Skill needed if this is confirmed as a repeatable AI responsibility. Workflow not yet audited."},
+        {"name": "Proposals & Commercial Offers", "kind": "gap", "status": "gap", "description": "Proposal development, commercial positioning, offer preparation and handoff.", "note": "Skill needed if this is confirmed as a repeatable AI responsibility. Workflow not yet audited."},
+        {"name": "CRM & Client Pipeline", "kind": "gap", "status": "gap", "description": "Pipeline visibility, client records, follow-ups and opportunity status.", "note": "Skill needed if this is confirmed as a repeatable AI responsibility. Workflow not yet audited."}
       ]
     }
   ],
@@ -260,8 +211,8 @@
     "ai-workflow-architect": {"name": "AI Workflow Architect", "status": "core", "does": "Maps business workflows, current skills, handoffs, overlaps, gaps and future architecture.", "where": "Company-level architecture layer.", "note": "Maintains the map. It does not perform the business work inside each category."},
     "adme-white-paper-strategist": {"name": "ADME White Paper Strategist", "status": "core", "does": "Controls white paper strategy, source scope, truth reset, evidence delta, Definition Brief, claims, structure and visual evidence planning.", "where": "White Papers & Client Communication, White Paper Strategy.", "note": "Core and currently well aligned."},
     "client-technical-planner": {"name": "Client Technical Planner", "status": "refactor", "does": "Creates technical narratives and first drafts from client and engineering inputs, but also spans planning, source interpretation, slide planning and next actions.", "where": "White Paper Writing and Engineering & Technical Delivery.", "note": "Useful today, but broader than a clean Writer role."},
-    "adme-client-communication": {"name": "ADME Client Communication", "status": "planned", "does": "Proposed to carry forward prior client feedback, prepare meetings and capture decisions, corrections, priorities, commitments and unresolved items.", "where": "White Papers & Client Communication.", "note": "Candidate gap identified by the White Paper Cycle."},
-    "adme-white-paper-writer": {"name": "ADME White Paper Writer", "status": "planned", "does": "Proposed focused writer that receives an approved Strategy Pack and turns it into the client-facing white paper.", "where": "White Paper Writing.", "note": "Potential target state if Client Technical Planner is narrowed or split."},
+    "adme-client-communication": {"name": "ADME Client Communication", "status": "planned", "does": "Proposed to carry forward prior client feedback, prepare meetings and capture decisions, corrections, priorities, commitments and unresolved items.", "where": "White Papers & Client Communication.", "note": "Skill needed. Candidate gap identified by the White Paper Cycle."},
+    "adme-white-paper-writer": {"name": "ADME White Paper Writer", "status": "planned", "does": "Proposed focused writer that receives an approved Strategy Pack and turns it into the client-facing white paper.", "where": "White Paper Writing.", "note": "Skill needed if the current Client Technical Planner is narrowed or split."},
     "minimal-editorial-visuals": {"name": "Minimal Editorial Visuals", "status": "supporting", "does": "Creates premium minimal visual concepts, prompts, cover images, inline visuals and editorial technology imagery.", "where": "Shared Production and supporting White Papers.", "note": "Cross-cutting production skill."},
     "indesign-professional-documents": {"name": "InDesign Professional Documents", "status": "supporting", "does": "Creates, refines, formats and quality-checks professional InDesign documents and final PDF outputs.", "where": "Shared Production.", "note": "Cross-cutting document production."},
     "docx": {"name": "DOCX", "status": "supporting", "does": "Creates, edits, redlines, comments on, renders and verifies DOCX files.", "where": "Shared Production.", "note": "Artifact skill, not a business workflow owner."},
