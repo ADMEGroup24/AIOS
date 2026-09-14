@@ -1,0 +1,49 @@
+{
+  "version": "0.1.0",
+  "categories": [
+    {
+      "id": "white-paper",
+      "name": "White Papers & Client Communication",
+      "description": "Current validated workflow",
+      "workflow": {
+        "name": "White Paper Cycle",
+        "blocks": [
+          {"name": "Project Progress", "purpose": "Engineering updates, ClickUp, Drive, milestones, risks, images and evidence.", "skills": []},
+          {"name": "Previous Meeting Feedback", "purpose": "Client decisions, corrections, questions, commitments, priorities and open items.", "skills": ["adme-client-communication"]},
+          {"name": "White Paper Strategy", "purpose": "Decide what changed, what matters now, what can be claimed and what the paper must achieve.", "skills": ["adme-white-paper-strategist"]},
+          {"name": "White Paper Writing", "purpose": "Turn the approved strategy into the client-facing narrative, evidence, clarity and Way Forward.", "skills": ["client-technical-planner", "adme-white-paper-writer"]},
+          {"name": "Client Meeting", "purpose": "Present progress, explain the Way Forward, provide clarity and move decisions forward.", "skills": ["adme-client-communication"]},
+          {"name": "Capture Client Feedback", "purpose": "Capture what was confirmed, changed, rejected, deferred, questioned or left open.", "skills": ["adme-client-communication"]}
+        ]
+      },
+      "extraSkills": ["minimal-editorial-visuals", "indesign-professional-documents", "docx", "pdfs", "adme-quizzer"]
+    },
+    {"id": "engineering", "name": "Engineering & Technical Delivery", "description": "Workflow still to be mapped", "workflow": null, "extraSkills": ["client-technical-planner", "spreadsheets", "slides"]},
+    {"id": "production", "name": "Documents, Visuals & Presentation Production", "description": "Cross-cutting production capabilities", "workflow": null, "extraSkills": ["minimal-editorial-visuals", "indesign-professional-documents", "docx", "pdfs", "slides", "spreadsheets"]},
+    {"id": "ai-system", "name": "AI Workflow & Skill Management", "description": "Meta-layer for building and maintaining the AI system", "workflow": null, "extraSkills": ["ai-workflow-architect", "skill-creator", "adme-quizzer"]},
+    {"id": "portfolio", "name": "Portfolio & Web", "description": "Existing portfolio and web-management ecosystem", "workflow": null, "extraSkills": ["portfolio-project-manager", "portfolio-webmaster", "perfect-fit-super-admin"]},
+    {"id": "career", "name": "Career & Opportunities", "description": "Existing opportunity, application and career-document skills", "workflow": null, "extraSkills": ["opportunity-assistant-manager", "roshan-job-application-workflow", "roshan-cover-letter", "indesign-cv-refiner"]}
+  ],
+  "skills": {
+    "ai-workflow-architect": {"name": "AI Workflow Architect", "status": "core", "does": "Maps business workflows, current skills, handoffs, overlaps, gaps and future architecture.", "where": "Company-level architecture layer.", "note": "Maintains the map without owning the business work inside each category."},
+    "adme-white-paper-strategist": {"name": "ADME White Paper Strategist", "status": "core", "does": "Controls white paper strategy, source scope, truth reset, evidence delta, Definition Brief, claims, structure and visual evidence planning.", "where": "White Papers & Client Communication, White Paper Strategy.", "note": "Core and currently well aligned."},
+    "client-technical-planner": {"name": "Client Technical Planner", "status": "refactor", "does": "Creates technical narratives and first drafts from client and engineering inputs, but also spans planning, source interpretation, slide planning and next actions.", "where": "White Paper Writing and Engineering & Technical Delivery.", "note": "Useful today, but broader than a clean Writer role."},
+    "adme-client-communication": {"name": "ADME Client Communication", "status": "planned", "does": "Proposed to carry forward prior client feedback, prepare meetings and capture decisions, corrections, priorities, commitments and unresolved items.", "where": "White Papers & Client Communication.", "note": "Candidate gap identified by the White Paper Cycle."},
+    "adme-white-paper-writer": {"name": "ADME White Paper Writer", "status": "planned", "does": "Proposed focused writer that receives an approved Strategy Pack and turns it into the client-facing white paper.", "where": "White Paper Writing.", "note": "Potential target state if Client Technical Planner is narrowed or split."},
+    "minimal-editorial-visuals": {"name": "Minimal Editorial Visuals", "status": "supporting", "does": "Creates premium minimal visual concepts, prompts, cover images, inline visuals and editorial technology imagery.", "where": "Documents, Visuals & Presentation Production, and supporting White Papers.", "note": "Cross-cutting production skill."},
+    "indesign-professional-documents": {"name": "InDesign Professional Documents", "status": "supporting", "does": "Creates, refines, formats and quality-checks professional InDesign documents and final PDF outputs.", "where": "Documents, Visuals & Presentation Production.", "note": "Cross-cutting document production."},
+    "docx": {"name": "DOCX", "status": "supporting", "does": "Creates, edits, redlines, comments on, renders and verifies DOCX files.", "where": "Documents, Visuals & Presentation Production.", "note": "Artifact skill, not a business workflow owner."},
+    "pdfs": {"name": "PDFs", "status": "supporting", "does": "Processes, edits, converts, extracts, verifies and quality-checks PDF files.", "where": "Documents, Visuals & Presentation Production.", "note": "Artifact skill."},
+    "slides": {"name": "Slides", "status": "supporting", "does": "Builds and edits presentation decks and visual aids.", "where": "Documents, Visuals & Presentation Production and engineering presentation support.", "note": "Cross-cutting production capability."},
+    "spreadsheets": {"name": "Spreadsheets", "status": "supporting", "does": "Creates, edits, formats and analyses XLSX, CSV and TSV files.", "where": "Engineering & Technical Delivery and general data workflows.", "note": "Cross-cutting data capability."},
+    "adme-quizzer": {"name": "ADME Quizzer", "status": "supporting", "does": "Turns bundles of clarification and decision questions into a structured interactive intake.", "where": "AI Workflow & Skill Management and any workflow needing structured user input.", "note": "Cross-cutting interaction skill."},
+    "skill-creator": {"name": "Skill Creator", "status": "core", "does": "Creates, updates, validates, packages and improves reusable ChatGPT skills.", "where": "AI Workflow & Skill Management.", "note": "Used to build the skill system itself."},
+    "portfolio-project-manager": {"name": "Portfolio Project Manager", "status": "core", "does": "Manages upstream creative development of portfolio projects, evidence, story discovery and handoff.", "where": "Portfolio & Web.", "note": "Current portfolio workflow skill."},
+    "portfolio-webmaster": {"name": "Portfolio Webmaster", "status": "core", "does": "Creates and manages portfolio content, CMS drafts, previews and approved publication.", "where": "Portfolio & Web.", "note": "Current portfolio production and CMS skill."},
+    "perfect-fit-super-admin": {"name": "Perfect Fit Super Admin", "status": "core", "does": "Manages, audits, recovers, changes, tests, releases and documents The Perfect Fit ecosystem.", "where": "Portfolio & Web / system administration.", "note": "Existing system-operations skill."},
+    "opportunity-assistant-manager": {"name": "Opportunity Assistant Manager", "status": "core", "does": "Manages dedicated opportunity assistant conversations, records, communications and next actions.", "where": "Career & Opportunities.", "note": "Opportunity management skill."},
+    "roshan-job-application-workflow": {"name": "Roshan Job Application Workflow", "status": "core", "does": "Manages end-to-end job and freelance opportunity workflows including applications, interviews, follow-ups, offers and tracking.", "where": "Career & Opportunities.", "note": "Career workflow skill."},
+    "roshan-cover-letter": {"name": "Roshan Cover Letter", "status": "core", "does": "Researches roles and employers, maps evidence and writes tailored cover letters.", "where": "Career & Opportunities.", "note": "Application writing skill."},
+    "indesign-cv-refiner": {"name": "InDesign CV Refiner", "status": "supporting", "does": "Builds, refines, formats and quality-checks CVs and resumes in Adobe InDesign.", "where": "Career & Opportunities.", "note": "Career document production skill."}
+  }
+}
