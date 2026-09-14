@@ -32,17 +32,16 @@ main{max-width:1560px;margin:0 auto;padding:22px 20px 34px}
 .folder-copy strong{font-size:17px;font-weight:600}.folder-copy span{font-size:10.5px;color:var(--muted);margin-top:4px;line-height:1.4}
 .workspace{display:none}.workspace.active{display:block}
 .workspace-head{max-width:1560px;margin:0 auto 12px;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.workspace-title h2{font-size:19px;margin:0;font-weight:600}.workspace-title p{font-size:11.5px;color:var(--muted);margin:4px 0 0;max-width:900px;line-height:1.5}
+.workspace-title h2{font-size:19px;margin:0;font-weight:600}.workspace-title p{font-size:11.5px;color:var(--muted);margin:4px 0 0;max-width:930px;line-height:1.5}
 .mindmap-shell{position:relative;width:100vw;height:calc(100vh - 135px);min-height:680px;margin-left:calc(50% - 50vw);overflow:hidden;background:
   radial-gradient(circle at 1px 1px,rgba(71,103,133,.12) 1px,transparent 1.2px) 0 0/26px 26px,
   linear-gradient(180deg,#ffffff 0%,#fbfcfe 100%)}
 .mindmap-shell:fullscreen{width:100vw;height:100vh;min-height:100vh;margin:0;background:
   radial-gradient(circle at 1px 1px,rgba(71,103,133,.12) 1px,transparent 1.2px) 0 0/26px 26px,
   linear-gradient(180deg,#ffffff 0%,#fbfcfe 100%)}
-.mindmap-viewport{position:absolute;inset:0;overflow:auto;cursor:grab;overscroll-behavior:none;scrollbar-width:none;touch-action:none}
-.mindmap-viewport::-webkit-scrollbar{display:none}.mindmap-viewport.dragging{cursor:grabbing;user-select:none}
-.mindmap-scaler{position:relative;min-width:100%;min-height:100%}
-.mindmap-stage{position:absolute;left:0;top:0;transform-origin:top left}
+.mindmap-viewport{position:absolute;inset:0;overflow:hidden;cursor:grab;overscroll-behavior:none;touch-action:none;outline:none}
+.mindmap-viewport.dragging{cursor:grabbing;user-select:none}
+.mindmap-stage{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
 .connector-layer{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
 .connector{fill:none;stroke-width:2;opacity:.72}
 .connector.current,.connector.core{stroke:#8eb4dc}.connector.shared,.connector.supporting{stroke:#9fcbb8}.connector.refactor{stroke:#dfbf7c}.connector.planned,.connector.gap{stroke:#c7cdd4;stroke-dasharray:5 5}
@@ -79,7 +78,7 @@ dialog{width:min(650px,calc(100% - 26px));border:0;border-radius:15px;padding:0;
     <div>
       <h1>ADME AI Operating System</h1>
       <div class="sub">Mind map of company workflows, AI skills, gaps and handoffs</div>
-      <div class="live-badge">Live architecture · v0.4</div>
+      <div class="live-badge">Live architecture · v0.5</div>
     </div>
   </div>
 </header>
@@ -98,24 +97,22 @@ dialog{width:min(650px,calc(100% - 26px));border:0;border-radius:15px;padding:0;
     <div class="workspace-head">
       <div class="workspace-title">
         <h2>ChatGPT</h2>
-        <p>Navigate the architecture as a live canvas. Drag to move, use the mouse wheel to zoom, and expand or collapse branches from the small control on each parent node.</p>
+        <p>The architecture now sits on an open canvas. Drag or scroll to move anywhere, including far beyond the current map. Use Ctrl or Cmd with the wheel to zoom, and expand or collapse branches from each parent node.</p>
       </div>
     </div>
 
     <div class="mindmap-shell" id="mindmapShell">
-      <div class="mindmap-viewport" id="mindmapViewport">
-        <div class="mindmap-scaler" id="mindmapScaler">
-          <div class="mindmap-stage" id="mindmapStage">
-            <svg class="connector-layer" id="connectorLayer" aria-hidden="true"></svg>
-            <div class="node-layer" id="nodeLayer"></div>
-          </div>
+      <div class="mindmap-viewport" id="mindmapViewport" tabindex="0" aria-label="ADME AI architecture canvas">
+        <div class="mindmap-stage" id="mindmapStage">
+          <svg class="connector-layer" id="connectorLayer" aria-hidden="true"></svg>
+          <div class="node-layer" id="nodeLayer"></div>
         </div>
       </div>
 
-      <div class="map-hint">Drag to move · Wheel to zoom · Click a node for details</div>
+      <div class="map-hint">Drag or scroll to move · Ctrl/Cmd + wheel to zoom · Click a node for details</div>
       <div class="map-toolbar" id="mapToolbar">
         <button id="zoomOut" type="button" title="Zoom out">-</button>
-        <span class="zoom-value" id="zoomValue">75%</span>
+        <span class="zoom-value" id="zoomValue">72%</span>
         <button id="zoomIn" type="button" title="Zoom in">+</button>
         <button id="fitMap" type="button">Fit</button>
         <button id="centerMap" type="button">Center</button>
@@ -166,20 +163,23 @@ const LEVEL_GAP=48;
 const ROOT_GAP=92;
 const V_GAP=14;
 const BRANCH_GAP=34;
-const MARGIN_X=90;
-const MARGIN_Y=90;
+const MARGIN_X=110;
+const MARGIN_Y=110;
 let architecture=null;
 let hydratedBranches=[];
-let nodeCounter=0;
 let canvasWidth=0;
 let canvasHeight=0;
 let rootBox=null;
-let zoom=.75;
+let zoom=.72;
+let panX=0;
+let panY=0;
+let lastViewportWidth=0;
+let lastViewportHeight=0;
+let pendingViewCenter=null;
 const collapsedNodes=new Set();
 
 const mapShell=document.getElementById('mindmapShell');
 const viewport=document.getElementById('mindmapViewport');
-const scaler=document.getElementById('mindmapScaler');
 const stage=document.getElementById('mindmapStage');
 const nodeLayer=document.getElementById('nodeLayer');
 const connectorLayer=document.getElementById('connectorLayer');
@@ -234,18 +234,33 @@ function xFor(side,depth,rootX){
   if(side==='right') return rootX+ROOT_W+ROOT_GAP+(depth-1)*(NODE_W+LEVEL_GAP);
   return rootX-ROOT_GAP-depth*NODE_W-(depth-1)*LEVEL_GAP;
 }
-function captureViewCenter(){
-  return {x:(viewport.scrollLeft+viewport.clientWidth/2)/zoom,y:(viewport.scrollTop+viewport.clientHeight/2)/zoom};
+function rootCenter(){
+  if(!rootBox) return {x:0,y:0};
+  return {x:rootBox.x+rootBox.w/2,y:rootBox.y+rootBox.h/2};
 }
-function restoreViewCenter(point){
+function captureRootScreen(){
+  const root=rootCenter();
+  return {x:panX+root.x*zoom,y:panY+root.y*zoom};
+}
+function restoreRootScreen(point){
+  if(!point||!rootBox) return;
+  const root=rootCenter();
+  panX=point.x-root.x*zoom;
+  panY=point.y-root.y*zoom;
+  applyTransform();
+}
+function currentWorldCenter(width=viewport.clientWidth,height=viewport.clientHeight){
+  return {x:(width/2-panX)/zoom,y:(height/2-panY)/zoom};
+}
+function restoreWorldCenter(point){
   if(!point) return;
-  viewport.scrollLeft=Math.max(0,point.x*zoom-viewport.clientWidth/2);
-  viewport.scrollTop=Math.max(0,point.y*zoom-viewport.clientHeight/2);
+  panX=viewport.clientWidth/2-point.x*zoom;
+  panY=viewport.clientHeight/2-point.y*zoom;
+  applyTransform();
 }
-function renderMindMap(preserveView=false){
+function renderMindMap(preserveRoot=false){
   if(!architecture) return;
-  const viewCenter=preserveView?captureViewCenter():null;
-  nodeCounter=0;
+  const rootScreen=preserveRoot&&rootBox?captureRootScreen():null;
   hydratedBranches=architecture.branches.map((branch,index)=>hydrateNode(branch,`branch.${index}`));
   const left=hydratedBranches.filter(b=>b.side==='left');
   const right=hydratedBranches.filter(b=>b.side!=='left');
@@ -281,8 +296,12 @@ function renderMindMap(preserveView=false){
   const rightStart=(canvasHeight-rightHeight)/2;
   layoutSide(left,'left',leftStart,rootX);
   layoutSide(right,'right',rightStart,rootX);
-  applyZoom();
-  requestAnimationFrame(()=>preserveView?restoreViewCenter(viewCenter):centerMap());
+
+  requestAnimationFrame(()=>{
+    if(rootScreen) restoreRootScreen(rootScreen); else centerMap();
+    lastViewportWidth=viewport.clientWidth;
+    lastViewportHeight=viewport.clientHeight;
+  });
 }
 function layoutSide(branches,side,startY,rootX){
   let top=startY;
@@ -366,38 +385,37 @@ function setOptionalRow(rowId,textId,value){
   document.getElementById(textId).textContent=value;
   row.classList.toggle('hidden',!value);
 }
-function applyZoom(){
-  stage.style.transform=`scale(${zoom})`;
-  scaler.style.width=Math.max(viewport.clientWidth,canvasWidth*zoom)+'px';
-  scaler.style.height=Math.max(viewport.clientHeight,canvasHeight*zoom)+'px';
+function applyTransform(){
+  stage.style.transform=`translate(${panX}px, ${panY}px) scale(${zoom})`;
   document.getElementById('zoomValue').textContent=Math.round(zoom*100)+'%';
 }
 function setZoom(newZoom,clientX=null,clientY=null){
-  const next=Math.max(.28,Math.min(1.45,newZoom));
-  if(next===zoom) return;
+  const next=Math.max(.16,Math.min(1.8,newZoom));
+  if(Math.abs(next-zoom)<.0001) return;
   const rect=viewport.getBoundingClientRect();
   const px=clientX===null?viewport.clientWidth/2:clientX-rect.left;
   const py=clientY===null?viewport.clientHeight/2:clientY-rect.top;
-  const worldX=(viewport.scrollLeft+px)/zoom;
-  const worldY=(viewport.scrollTop+py)/zoom;
+  const worldX=(px-panX)/zoom;
+  const worldY=(py-panY)/zoom;
   zoom=next;
-  applyZoom();
-  viewport.scrollLeft=Math.max(0,worldX*zoom-px);
-  viewport.scrollTop=Math.max(0,worldY*zoom-py);
+  panX=px-worldX*zoom;
+  panY=py-worldY*zoom;
+  applyTransform();
 }
 function centerMap(){
   if(!rootBox) return;
-  const cx=(rootBox.x+rootBox.w/2)*zoom;
-  const cy=(rootBox.y+rootBox.h/2)*zoom;
-  viewport.scrollLeft=Math.max(0,cx-viewport.clientWidth/2);
-  viewport.scrollTop=Math.max(0,cy-viewport.clientHeight/2);
+  const root=rootCenter();
+  panX=viewport.clientWidth/2-root.x*zoom;
+  panY=viewport.clientHeight/2-root.y*zoom;
+  applyTransform();
 }
 function fitMap(){
   if(!canvasWidth||!canvasHeight) return;
-  const fitX=(viewport.clientWidth-80)/canvasWidth;
-  const fitY=(viewport.clientHeight-80)/canvasHeight;
-  zoom=Math.max(.28,Math.min(.95,fitX,fitY));
-  applyZoom();
+  const padX=Math.min(260,viewport.clientWidth*.18);
+  const padY=Math.min(210,viewport.clientHeight*.18);
+  const fitX=(viewport.clientWidth-padX*2)/canvasWidth;
+  const fitY=(viewport.clientHeight-padY*2)/canvasHeight;
+  zoom=Math.max(.16,Math.min(.86,fitX,fitY));
   centerMap();
 }
 function collectExpandable(nodes,result=[]){
@@ -411,10 +429,10 @@ function collapseAll(){
   const ids=collectExpandable(hydratedBranches,[]);
   collapsedNodes.clear();
   ids.forEach(id=>collapsedNodes.add(id));
-  renderMindMap(false);
-  requestAnimationFrame(fitMap);
+  renderMindMap(true);
 }
 async function toggleFullscreen(){
+  pendingViewCenter=currentWorldCenter();
   if(document.fullscreenElement===mapShell){await document.exitFullscreen();}
   else if(mapShell.requestFullscreen){await mapShell.requestFullscreen();}
 }
@@ -426,7 +444,7 @@ function switchWorkspace(name){
   });
   document.querySelectorAll('.workspace').forEach(space=>space.classList.remove('active'));
   document.getElementById(`workspace-${name}`).classList.add('active');
-  if(name==='chatgpt') requestAnimationFrame(()=>{applyZoom();centerMap();});
+  if(name==='chatgpt') requestAnimationFrame(applyTransform);
 }
 async function loadArchitecture(){
   try{
@@ -452,33 +470,76 @@ document.getElementById('fullscreenMap').addEventListener('click',toggleFullscre
 document.addEventListener('fullscreenchange',()=>{
   const full=document.fullscreenElement===mapShell;
   document.getElementById('fullscreenMap').textContent=full?'Exit full screen':'Full screen';
-  requestAnimationFrame(()=>{applyZoom();if(full) fitMap();});
+  requestAnimationFrame(()=>{
+    if(pendingViewCenter){restoreWorldCenter(pendingViewCenter);pendingViewCenter=null;}
+    else applyTransform();
+    lastViewportWidth=viewport.clientWidth;
+    lastViewportHeight=viewport.clientHeight;
+  });
 });
+
 viewport.addEventListener('wheel',event=>{
   event.preventDefault();
-  const factor=event.deltaY<0?1.09:.91;
-  setZoom(zoom*factor,event.clientX,event.clientY);
+  if(event.ctrlKey||event.metaKey){
+    const factor=event.deltaY<0?1.09:.91;
+    setZoom(zoom*factor,event.clientX,event.clientY);
+  }else{
+    panX-=event.deltaX;
+    panY-=event.deltaY;
+    applyTransform();
+  }
 },{passive:false});
 
-let dragging=false,startX=0,startY=0,startLeft=0,startTop=0,pointerId=null;
+let dragging=false,startX=0,startY=0,startPanX=0,startPanY=0,pointerId=null;
 viewport.addEventListener('pointerdown',event=>{
-  if(event.target.closest('.map-node')||event.target.closest('.map-toolbar')) return;
-  dragging=true;pointerId=event.pointerId;viewport.setPointerCapture(pointerId);viewport.classList.add('dragging');
-  startX=event.clientX;startY=event.clientY;startLeft=viewport.scrollLeft;startTop=viewport.scrollTop;
+  if(event.target.closest('.map-node')||event.target.closest('.map-toolbar')||event.target.closest('.map-key')) return;
+  dragging=true;
+  pointerId=event.pointerId;
+  viewport.setPointerCapture(pointerId);
+  viewport.classList.add('dragging');
+  startX=event.clientX;
+  startY=event.clientY;
+  startPanX=panX;
+  startPanY=panY;
 });
 viewport.addEventListener('pointermove',event=>{
   if(!dragging||event.pointerId!==pointerId) return;
-  viewport.scrollLeft=startLeft-(event.clientX-startX);
-  viewport.scrollTop=startTop-(event.clientY-startY);
+  panX=startPanX+(event.clientX-startX);
+  panY=startPanY+(event.clientY-startY);
+  applyTransform();
 });
-function endDrag(event){
+function endDrag(){
   if(!dragging) return;
   if(pointerId!==null&&viewport.hasPointerCapture(pointerId)) viewport.releasePointerCapture(pointerId);
-  dragging=false;pointerId=null;viewport.classList.remove('dragging');
+  dragging=false;
+  pointerId=null;
+  viewport.classList.remove('dragging');
 }
 viewport.addEventListener('pointerup',endDrag);
 viewport.addEventListener('pointercancel',endDrag);
-window.addEventListener('resize',()=>{if(architecture){applyZoom();}});
+
+viewport.addEventListener('keydown',event=>{
+  const step=80;
+  if(event.key==='ArrowLeft'){panX+=step;event.preventDefault();}
+  else if(event.key==='ArrowRight'){panX-=step;event.preventDefault();}
+  else if(event.key==='ArrowUp'){panY+=step;event.preventDefault();}
+  else if(event.key==='ArrowDown'){panY-=step;event.preventDefault();}
+  else if(event.key==='+'||event.key==='='){setZoom(zoom+.1);event.preventDefault();return;}
+  else if(event.key==='-'){setZoom(zoom-.1);event.preventDefault();return;}
+  else if(event.key==='0'){centerMap();event.preventDefault();return;}
+  else return;
+  applyTransform();
+});
+
+window.addEventListener('resize',()=>{
+  if(!architecture) return;
+  const oldWidth=lastViewportWidth||viewport.clientWidth;
+  const oldHeight=lastViewportHeight||viewport.clientHeight;
+  const centre=currentWorldCenter(oldWidth,oldHeight);
+  lastViewportWidth=viewport.clientWidth;
+  lastViewportHeight=viewport.clientHeight;
+  restoreWorldCenter(centre);
+});
 
 loadArchitecture();
 </script>
