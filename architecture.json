@@ -1,49 +1,281 @@
 {
-  "version": "0.1.0",
-  "categories": [
+  "version": "0.3.0",
+  "title": "ADME ChatGPT AI Operating System",
+  "root": {
+    "name": "ADME",
+    "subtitle": "ChatGPT AI Operating System",
+    "description": "Company mind map of current AI capabilities, workflows, skills, planned capabilities and assumed gaps."
+  },
+  "branches": [
     {
-      "id": "white-paper",
-      "name": "White Papers & Client Communication",
-      "description": "Current validated workflow",
-      "workflow": {
-        "name": "White Paper Cycle",
-        "blocks": [
-          {"name": "Project Progress", "purpose": "Engineering updates, ClickUp, Drive, milestones, risks, images and evidence.", "skills": []},
-          {"name": "Previous Meeting Feedback", "purpose": "Client decisions, corrections, questions, commitments, priorities and open items.", "skills": ["adme-client-communication"]},
-          {"name": "White Paper Strategy", "purpose": "Decide what changed, what matters now, what can be claimed and what the paper must achieve.", "skills": ["adme-white-paper-strategist"]},
-          {"name": "White Paper Writing", "purpose": "Turn the approved strategy into the client-facing narrative, evidence, clarity and Way Forward.", "skills": ["client-technical-planner", "adme-white-paper-writer"]},
-          {"name": "Client Meeting", "purpose": "Present progress, explain the Way Forward, provide clarity and move decisions forward.", "skills": ["adme-client-communication"]},
-          {"name": "Capture Client Feedback", "purpose": "Capture what was confirmed, changed, rejected, deferred, questioned or left open.", "skills": ["adme-client-communication"]}
-        ]
-      },
-      "extraSkills": ["minimal-editorial-visuals", "indesign-professional-documents", "docx", "pdfs", "adme-quizzer"]
+      "id": "client-communications",
+      "name": "Client & Communications",
+      "side": "left",
+      "kind": "capability",
+      "status": "current",
+      "description": "Client-facing communication and the first validated ADME AI workflow.",
+      "children": [
+        {
+          "name": "White Papers & Client Communication",
+          "kind": "capability",
+          "status": "current",
+          "description": "Current validated workflow area.",
+          "children": [
+            {
+              "name": "White Paper Cycle",
+              "kind": "workflow",
+              "status": "current",
+              "description": "Project progress and previous feedback feed strategy, writing, the client meeting and the next feedback cycle.",
+              "children": [
+                {
+                  "name": "1. Project Progress",
+                  "kind": "process",
+                  "status": "gap",
+                  "description": "Engineering updates, ClickUp, Drive, milestones, risks, images and evidence.",
+                  "note": "No dedicated skill has been established. This may remain source-driven rather than becoming a skill."
+                },
+                {
+                  "name": "2. Previous Meeting Feedback",
+                  "kind": "process",
+                  "status": "planned",
+                  "description": "Carry forward client decisions, corrections, questions, commitments, priorities and open items.",
+                  "children": [
+                    {"skill": "adme-client-communication"}
+                  ]
+                },
+                {
+                  "name": "3. White Paper Strategy",
+                  "kind": "process",
+                  "status": "current",
+                  "description": "Decide what changed, what matters now, what can be claimed and what the paper must achieve.",
+                  "children": [
+                    {"skill": "adme-white-paper-strategist"}
+                  ]
+                },
+                {
+                  "name": "4. White Paper Writing",
+                  "kind": "process",
+                  "status": "refactor",
+                  "description": "Turn approved strategy and evidence into the client-facing technical narrative and Way Forward.",
+                  "children": [
+                    {"skill": "client-technical-planner"},
+                    {"skill": "adme-white-paper-writer"}
+                  ]
+                },
+                {
+                  "name": "5. Client Meeting",
+                  "kind": "process",
+                  "status": "planned",
+                  "description": "Present progress, explain direction, clarify issues and move decisions forward.",
+                  "children": [
+                    {"skill": "adme-client-communication"}
+                  ]
+                },
+                {
+                  "name": "6. Capture Client Feedback",
+                  "kind": "process",
+                  "status": "planned",
+                  "description": "Capture confirmed, changed, rejected, deferred, questioned and unresolved items.",
+                  "children": [
+                    {"skill": "adme-client-communication"}
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     },
-    {"id": "engineering", "name": "Engineering & Technical Delivery", "description": "Workflow still to be mapped", "workflow": null, "extraSkills": ["client-technical-planner", "spreadsheets", "slides"]},
-    {"id": "production", "name": "Documents, Visuals & Presentation Production", "description": "Cross-cutting production capabilities", "workflow": null, "extraSkills": ["minimal-editorial-visuals", "indesign-professional-documents", "docx", "pdfs", "slides", "spreadsheets"]},
-    {"id": "ai-system", "name": "AI Workflow & Skill Management", "description": "Meta-layer for building and maintaining the AI system", "workflow": null, "extraSkills": ["ai-workflow-architect", "skill-creator", "adme-quizzer"]},
-    {"id": "portfolio", "name": "Portfolio & Web", "description": "Existing portfolio and web-management ecosystem", "workflow": null, "extraSkills": ["portfolio-project-manager", "portfolio-webmaster", "perfect-fit-super-admin"]},
-    {"id": "career", "name": "Career & Opportunities", "description": "Existing opportunity, application and career-document skills", "workflow": null, "extraSkills": ["opportunity-assistant-manager", "roshan-job-application-workflow", "roshan-cover-letter", "indesign-cv-refiner"]}
+    {
+      "id": "portfolio-web",
+      "name": "Portfolio & Web",
+      "side": "left",
+      "kind": "capability",
+      "status": "current",
+      "description": "Existing portfolio, CMS and system administration capabilities.",
+      "children": [
+        {
+          "name": "Portfolio Story Development",
+          "kind": "workflow",
+          "status": "current",
+          "children": [
+            {"skill": "portfolio-project-manager"}
+          ]
+        },
+        {
+          "name": "Portfolio CMS & Publishing",
+          "kind": "workflow",
+          "status": "current",
+          "children": [
+            {"skill": "portfolio-webmaster"}
+          ]
+        },
+        {
+          "name": "Perfect Fit System Administration",
+          "kind": "workflow",
+          "status": "current",
+          "children": [
+            {"skill": "perfect-fit-super-admin"}
+          ]
+        },
+        {
+          "name": "ADME Corporate Web Management",
+          "kind": "gap",
+          "status": "gap",
+          "description": "Placeholder for company website and digital presence management if ADME decides this should become an AI-supported workflow.",
+          "note": "Assumed gap. Workflow not yet audited."
+        }
+      ]
+    },
+    {
+      "id": "people-opportunities",
+      "name": "People & Opportunities",
+      "side": "left",
+      "kind": "capability",
+      "status": "current",
+      "description": "Existing career and opportunity capabilities currently represented in the skill library.",
+      "children": [
+        {
+          "name": "Opportunity Management",
+          "kind": "workflow",
+          "status": "current",
+          "children": [
+            {"skill": "opportunity-assistant-manager"}
+          ]
+        },
+        {
+          "name": "Job & Freelance Applications",
+          "kind": "workflow",
+          "status": "current",
+          "children": [
+            {"skill": "roshan-job-application-workflow"}
+          ]
+        },
+        {
+          "name": "Cover Letter Production",
+          "kind": "workflow",
+          "status": "current",
+          "children": [
+            {"skill": "roshan-cover-letter"}
+          ]
+        },
+        {
+          "name": "CV & Resume Production",
+          "kind": "workflow",
+          "status": "current",
+          "children": [
+            {"skill": "indesign-cv-refiner"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "organization-operations",
+      "name": "Organization & Operations",
+      "side": "left",
+      "kind": "capability",
+      "status": "gap",
+      "description": "Reserved company management area. These nodes are hypotheses until ADME audits the real workflows.",
+      "note": "Assumed gap branch. These boxes do not imply that a dedicated skill should be created.",
+      "children": [
+        {"name": "Organizational Management", "kind": "gap", "status": "gap", "description": "Leadership, priorities, operating rhythm and organizational coordination.", "note": "Assumed gap. Workflow not yet audited."},
+        {"name": "Project & Resource Management", "kind": "gap", "status": "gap", "description": "Portfolio visibility, resource coordination, project governance and delivery oversight.", "note": "Assumed gap. Workflow not yet audited."},
+        {"name": "People & HR Operations", "kind": "gap", "status": "gap", "description": "People administration, onboarding, performance, hiring and internal team processes.", "note": "Assumed gap. Workflow not yet audited."},
+        {"name": "Finance & Administration", "kind": "gap", "status": "gap", "description": "Finance, administration, approvals and management reporting.", "note": "Assumed gap. Workflow not yet audited."},
+        {"name": "Knowledge & SOP Management", "kind": "gap", "status": "gap", "description": "Company knowledge, operating procedures, document ownership and controlled updates.", "note": "Assumed gap. Workflow not yet audited."},
+        {"name": "Internal Reporting & Decision Support", "kind": "gap", "status": "gap", "description": "Leadership reporting, summaries, decision preparation and follow-through.", "note": "Assumed gap. Workflow not yet audited."}
+      ]
+    },
+    {
+      "id": "engineering",
+      "name": "Engineering & Technical Delivery",
+      "side": "right",
+      "kind": "capability",
+      "status": "current",
+      "description": "Current skill coverage exists, but the end-to-end business workflow has not yet been mapped.",
+      "children": [
+        {
+          "name": "Technical Planning & Narrative",
+          "kind": "workflow",
+          "status": "refactor",
+          "children": [
+            {"skill": "client-technical-planner"}
+          ]
+        },
+        {"name": "Engineering Workflow & Delivery", "kind": "gap", "status": "gap", "description": "End-to-end engineering delivery workflow, milestones, ownership and handoffs.", "note": "Assumed gap until the Engineering & Technical Delivery workflow is audited."},
+        {"name": "Requirements & Technical Decisions", "kind": "gap", "status": "gap", "description": "Requirements capture, design decisions, trade-offs and decision history.", "note": "Assumed gap until the engineering workflow is audited."},
+        {"name": "Test, Validation & Evidence", "kind": "gap", "status": "gap", "description": "Test planning, validation evidence, technical proof and controlled results.", "note": "Assumed gap until the engineering workflow is audited."},
+        {"name": "Engineering Knowledge Capture", "kind": "gap", "status": "gap", "description": "Reusable technical knowledge, lessons learned and project evidence capture.", "note": "Assumed gap until the engineering workflow is audited."}
+      ]
+    },
+    {
+      "id": "production",
+      "name": "Shared Production",
+      "side": "right",
+      "kind": "cross-cutting",
+      "status": "shared",
+      "description": "Reusable document, visual, presentation and data capabilities that support many workflows rather than owning a department outcome.",
+      "children": [
+        {"name": "Editorial Visuals", "kind": "support", "status": "shared", "children": [{"skill": "minimal-editorial-visuals"}]},
+        {"name": "Professional Documents", "kind": "support", "status": "shared", "children": [{"skill": "indesign-professional-documents"}]},
+        {"name": "DOCX Production", "kind": "support", "status": "shared", "children": [{"skill": "docx"}]},
+        {"name": "PDF Production", "kind": "support", "status": "shared", "children": [{"skill": "pdfs"}]},
+        {"name": "Presentations", "kind": "support", "status": "shared", "children": [{"skill": "slides"}]},
+        {"name": "Spreadsheets & Data", "kind": "support", "status": "shared", "children": [{"skill": "spreadsheets"}]}
+      ]
+    },
+    {
+      "id": "ai-system",
+      "name": "AI System & Governance",
+      "side": "right",
+      "kind": "cross-cutting",
+      "status": "shared",
+      "description": "Meta-layer used to design, maintain and govern the AI operating system itself.",
+      "children": [
+        {"name": "Workflow Architecture", "kind": "workflow", "status": "current", "children": [{"skill": "ai-workflow-architect"}]},
+        {"name": "Skill Design & Maintenance", "kind": "workflow", "status": "current", "children": [{"skill": "skill-creator"}]},
+        {"name": "Structured Intake", "kind": "support", "status": "shared", "children": [{"skill": "adme-quizzer"}]},
+        {"name": "Skill QA & Approval", "kind": "gap", "status": "gap", "description": "Testing, acceptance criteria and approval before company-wide skill use.", "note": "Known governance topic, but no dedicated capability has been standardized."},
+        {"name": "AIOS Governance & Change Control", "kind": "gap", "status": "gap", "description": "Ownership, versioning, architecture approvals and controlled change management.", "note": "Known governance topic, but the operating workflow is not yet standardized."},
+        {"name": "Access, Security & Usage Monitoring", "kind": "gap", "status": "gap", "description": "Access boundaries, security rules, adoption visibility and operational monitoring.", "note": "Known SOP topic, but workflow and ownership are not yet standardized."}
+      ]
+    },
+    {
+      "id": "commercial-growth",
+      "name": "Commercial & Growth",
+      "side": "right",
+      "kind": "capability",
+      "status": "gap",
+      "description": "Reserved commercial capability area. These nodes are hypotheses until ADME maps the real business process.",
+      "note": "Assumed gap branch. No current skill ownership is asserted.",
+      "children": [
+        {"name": "Sales & Business Development", "kind": "gap", "status": "gap", "description": "Lead generation, qualification, relationship development and opportunity progression.", "note": "Assumed gap. Workflow not yet audited."},
+        {"name": "Marketing & Brand", "kind": "gap", "status": "gap", "description": "Brand, campaigns, content and market communication.", "note": "Assumed gap. Workflow not yet audited."},
+        {"name": "Proposals & Commercial Offers", "kind": "gap", "status": "gap", "description": "Proposal development, commercial positioning, offer preparation and handoff.", "note": "Assumed gap. Workflow not yet audited."},
+        {"name": "CRM & Client Pipeline", "kind": "gap", "status": "gap", "description": "Pipeline visibility, client records, follow-ups and opportunity status.", "note": "Assumed gap. Workflow not yet audited."}
+      ]
+    }
   ],
   "skills": {
-    "ai-workflow-architect": {"name": "AI Workflow Architect", "status": "core", "does": "Maps business workflows, current skills, handoffs, overlaps, gaps and future architecture.", "where": "Company-level architecture layer.", "note": "Maintains the map without owning the business work inside each category."},
+    "ai-workflow-architect": {"name": "AI Workflow Architect", "status": "core", "does": "Maps business workflows, current skills, handoffs, overlaps, gaps and future architecture.", "where": "Company-level architecture layer.", "note": "Maintains the map. It does not perform the business work inside each category."},
     "adme-white-paper-strategist": {"name": "ADME White Paper Strategist", "status": "core", "does": "Controls white paper strategy, source scope, truth reset, evidence delta, Definition Brief, claims, structure and visual evidence planning.", "where": "White Papers & Client Communication, White Paper Strategy.", "note": "Core and currently well aligned."},
     "client-technical-planner": {"name": "Client Technical Planner", "status": "refactor", "does": "Creates technical narratives and first drafts from client and engineering inputs, but also spans planning, source interpretation, slide planning and next actions.", "where": "White Paper Writing and Engineering & Technical Delivery.", "note": "Useful today, but broader than a clean Writer role."},
     "adme-client-communication": {"name": "ADME Client Communication", "status": "planned", "does": "Proposed to carry forward prior client feedback, prepare meetings and capture decisions, corrections, priorities, commitments and unresolved items.", "where": "White Papers & Client Communication.", "note": "Candidate gap identified by the White Paper Cycle."},
     "adme-white-paper-writer": {"name": "ADME White Paper Writer", "status": "planned", "does": "Proposed focused writer that receives an approved Strategy Pack and turns it into the client-facing white paper.", "where": "White Paper Writing.", "note": "Potential target state if Client Technical Planner is narrowed or split."},
-    "minimal-editorial-visuals": {"name": "Minimal Editorial Visuals", "status": "supporting", "does": "Creates premium minimal visual concepts, prompts, cover images, inline visuals and editorial technology imagery.", "where": "Documents, Visuals & Presentation Production, and supporting White Papers.", "note": "Cross-cutting production skill."},
-    "indesign-professional-documents": {"name": "InDesign Professional Documents", "status": "supporting", "does": "Creates, refines, formats and quality-checks professional InDesign documents and final PDF outputs.", "where": "Documents, Visuals & Presentation Production.", "note": "Cross-cutting document production."},
-    "docx": {"name": "DOCX", "status": "supporting", "does": "Creates, edits, redlines, comments on, renders and verifies DOCX files.", "where": "Documents, Visuals & Presentation Production.", "note": "Artifact skill, not a business workflow owner."},
-    "pdfs": {"name": "PDFs", "status": "supporting", "does": "Processes, edits, converts, extracts, verifies and quality-checks PDF files.", "where": "Documents, Visuals & Presentation Production.", "note": "Artifact skill."},
-    "slides": {"name": "Slides", "status": "supporting", "does": "Builds and edits presentation decks and visual aids.", "where": "Documents, Visuals & Presentation Production and engineering presentation support.", "note": "Cross-cutting production capability."},
-    "spreadsheets": {"name": "Spreadsheets", "status": "supporting", "does": "Creates, edits, formats and analyses XLSX, CSV and TSV files.", "where": "Engineering & Technical Delivery and general data workflows.", "note": "Cross-cutting data capability."},
-    "adme-quizzer": {"name": "ADME Quizzer", "status": "supporting", "does": "Turns bundles of clarification and decision questions into a structured interactive intake.", "where": "AI Workflow & Skill Management and any workflow needing structured user input.", "note": "Cross-cutting interaction skill."},
-    "skill-creator": {"name": "Skill Creator", "status": "core", "does": "Creates, updates, validates, packages and improves reusable ChatGPT skills.", "where": "AI Workflow & Skill Management.", "note": "Used to build the skill system itself."},
+    "minimal-editorial-visuals": {"name": "Minimal Editorial Visuals", "status": "supporting", "does": "Creates premium minimal visual concepts, prompts, cover images, inline visuals and editorial technology imagery.", "where": "Shared Production and supporting White Papers.", "note": "Cross-cutting production skill."},
+    "indesign-professional-documents": {"name": "InDesign Professional Documents", "status": "supporting", "does": "Creates, refines, formats and quality-checks professional InDesign documents and final PDF outputs.", "where": "Shared Production.", "note": "Cross-cutting document production."},
+    "docx": {"name": "DOCX", "status": "supporting", "does": "Creates, edits, redlines, comments on, renders and verifies DOCX files.", "where": "Shared Production.", "note": "Artifact skill, not a business workflow owner."},
+    "pdfs": {"name": "PDFs", "status": "supporting", "does": "Processes, edits, converts, extracts, verifies and quality-checks PDF files.", "where": "Shared Production.", "note": "Artifact skill."},
+    "slides": {"name": "Slides", "status": "supporting", "does": "Builds and edits presentation decks and visual aids.", "where": "Shared Production and engineering presentation support.", "note": "Cross-cutting production capability."},
+    "spreadsheets": {"name": "Spreadsheets", "status": "supporting", "does": "Creates, edits, formats and analyses XLSX, CSV and TSV files.", "where": "Shared Production and general data workflows.", "note": "Cross-cutting data capability."},
+    "adme-quizzer": {"name": "ADME Quizzer", "status": "supporting", "does": "Turns bundles of clarification and decision questions into a structured interactive intake.", "where": "AI System & Governance and any workflow needing structured user input.", "note": "Cross-cutting interaction skill."},
+    "skill-creator": {"name": "Skill Creator", "status": "core", "does": "Creates, updates, validates, packages and improves reusable ChatGPT skills.", "where": "AI System & Governance.", "note": "Used to build the skill system itself."},
     "portfolio-project-manager": {"name": "Portfolio Project Manager", "status": "core", "does": "Manages upstream creative development of portfolio projects, evidence, story discovery and handoff.", "where": "Portfolio & Web.", "note": "Current portfolio workflow skill."},
     "portfolio-webmaster": {"name": "Portfolio Webmaster", "status": "core", "does": "Creates and manages portfolio content, CMS drafts, previews and approved publication.", "where": "Portfolio & Web.", "note": "Current portfolio production and CMS skill."},
-    "perfect-fit-super-admin": {"name": "Perfect Fit Super Admin", "status": "core", "does": "Manages, audits, recovers, changes, tests, releases and documents The Perfect Fit ecosystem.", "where": "Portfolio & Web / system administration.", "note": "Existing system-operations skill."},
-    "opportunity-assistant-manager": {"name": "Opportunity Assistant Manager", "status": "core", "does": "Manages dedicated opportunity assistant conversations, records, communications and next actions.", "where": "Career & Opportunities.", "note": "Opportunity management skill."},
-    "roshan-job-application-workflow": {"name": "Roshan Job Application Workflow", "status": "core", "does": "Manages end-to-end job and freelance opportunity workflows including applications, interviews, follow-ups, offers and tracking.", "where": "Career & Opportunities.", "note": "Career workflow skill."},
-    "roshan-cover-letter": {"name": "Roshan Cover Letter", "status": "core", "does": "Researches roles and employers, maps evidence and writes tailored cover letters.", "where": "Career & Opportunities.", "note": "Application writing skill."},
-    "indesign-cv-refiner": {"name": "InDesign CV Refiner", "status": "supporting", "does": "Builds, refines, formats and quality-checks CVs and resumes in Adobe InDesign.", "where": "Career & Opportunities.", "note": "Career document production skill."}
+    "perfect-fit-super-admin": {"name": "Perfect Fit Super Admin", "status": "core", "does": "Manages, audits, recovers, changes, tests, releases and documents The Perfect Fit ecosystem.", "where": "Portfolio & Web and system administration.", "note": "Existing system-operations skill."},
+    "opportunity-assistant-manager": {"name": "Opportunity Assistant Manager", "status": "core", "does": "Manages dedicated opportunity assistant conversations, records, communications and next actions.", "where": "People & Opportunities.", "note": "Opportunity management skill."},
+    "roshan-job-application-workflow": {"name": "Roshan Job Application Workflow", "status": "core", "does": "Manages end-to-end job and freelance opportunity workflows including applications, interviews, follow-ups, offers and tracking.", "where": "People & Opportunities.", "note": "Career workflow skill."},
+    "roshan-cover-letter": {"name": "Roshan Cover Letter", "status": "core", "does": "Researches roles and employers, maps evidence and writes tailored cover letters.", "where": "People & Opportunities.", "note": "Application writing skill."},
+    "indesign-cv-refiner": {"name": "InDesign CV Refiner", "status": "supporting", "does": "Builds, refines, formats and quality-checks CVs and resumes in Adobe InDesign.", "where": "People & Opportunities.", "note": "Career document production skill."}
   }
 }
