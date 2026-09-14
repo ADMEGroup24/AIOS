@@ -14,39 +14,42 @@
 }
 *{box-sizing:border-box}
 html,body,button,input,select,textarea,dialog{font-family:'Poppins',Arial,sans-serif}
-body{margin:0;background:var(--bg);color:var(--text)}
-header{padding:24px 20px 15px;border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:20}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text)}
+header{padding:20px 20px 14px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.95);position:sticky;top:0;z-index:30;backdrop-filter:blur(12px)}
 .header-inner{max-width:1560px;margin:auto;display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-h1{font-size:27px;margin:0;font-weight:600}.sub{color:var(--muted);font-size:12.5px;margin-top:4px}.live-badge{display:inline-block;margin-top:8px;padding:4px 8px;border-radius:999px;background:var(--green-bg);color:var(--green);border:1px solid #b9ddce;font-size:10.5px;font-weight:700}
-.actions{display:flex;gap:7px;flex-wrap:wrap;align-items:center}.actions.hidden{display:none}
+h1{font-size:27px;margin:0;font-weight:600}.sub{color:var(--muted);font-size:12.5px;margin-top:4px}.live-badge{display:inline-block;margin-top:7px;padding:4px 8px;border-radius:999px;background:var(--green-bg);color:var(--green);border:1px solid #b9ddce;font-size:10.5px;font-weight:700}
 button,.btn{border:1px solid var(--line);background:#fff;color:var(--text);padding:8px 11px;border-radius:9px;cursor:pointer;font-size:12px}
-button:hover{border-color:#aebdcc}.zoom-value{min-width:48px;text-align:center;color:var(--muted);font-size:11px}
-main{max-width:1560px;margin:0 auto;padding:26px 20px 50px}
-.folder-grid{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:26px}
-.platform-folder{position:relative;width:220px;height:134px;border:0;background:transparent;padding:18px 0 0;text-align:left;cursor:pointer}
-.platform-folder::before{content:"";position:absolute;top:0;left:14px;width:90px;height:30px;background:#e7edf5;border:1px solid #c8d3df;border-bottom:0;border-radius:10px 10px 0 0;transition:.18s ease}
-.platform-folder::after{content:"";position:absolute;top:18px;left:0;right:0;bottom:0;background:#f5f8fc;border:1px solid #c8d3df;border-radius:11px;box-shadow:0 5px 14px rgba(23,50,77,.06);transition:.18s ease}
-.platform-folder:hover::after{transform:translateY(-2px);box-shadow:0 8px 20px rgba(23,50,77,.09)}
+button:hover{border-color:#aebdcc}
+main{max-width:1560px;margin:0 auto;padding:22px 20px 34px}
+.folder-grid{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.platform-folder{position:relative;width:205px;height:118px;border:0;background:transparent;padding:17px 0 0;text-align:left;cursor:pointer}
+.platform-folder::before{content:"";position:absolute;top:0;left:13px;width:84px;height:27px;background:#e7edf5;border:1px solid #c8d3df;border-bottom:0;border-radius:9px 9px 0 0;transition:.18s ease}
+.platform-folder::after{content:"";position:absolute;top:17px;left:0;right:0;bottom:0;background:#f5f8fc;border:1px solid #c8d3df;border-radius:10px;box-shadow:0 4px 12px rgba(23,50,77,.05);transition:.18s ease}
+.platform-folder:hover::after{transform:translateY(-2px);box-shadow:0 8px 18px rgba(23,50,77,.08)}
 .platform-folder.active::before{background:var(--blue-bg);border-color:#a9c5e4}
-.platform-folder.active::after{background:#fff;border-color:#9bbce0;box-shadow:0 8px 22px rgba(47,111,179,.12)}
-.folder-copy{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;height:100%;padding:20px 20px 17px}
-.folder-copy strong{font-size:18px;font-weight:600}.folder-copy span{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4}
+.platform-folder.active::after{background:#fff;border-color:#9bbce0;box-shadow:0 8px 20px rgba(47,111,179,.10)}
+.folder-copy{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;height:100%;padding:18px 18px 14px}
+.folder-copy strong{font-size:17px;font-weight:600}.folder-copy span{font-size:10.5px;color:var(--muted);margin-top:4px;line-height:1.4}
 .workspace{display:none}.workspace.active{display:block}
-.workspace-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px}
-.workspace-title h2{font-size:20px;margin:0;font-weight:600}.workspace-title p{font-size:12px;color:var(--muted);margin:4px 0 0;max-width:860px;line-height:1.5}
-.legend{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;font-size:11px}
-.pill{padding:5px 8px;border-radius:999px;border:1px solid var(--line);background:#fff}
-.pill.core{background:var(--blue-bg);color:var(--blue);border-color:#aac6e6}.pill.supporting{background:var(--green-bg);color:var(--green);border-color:#b9ddce}.pill.refactor{background:var(--yellow-bg);color:var(--yellow);border-color:#ead09a}.pill.gap{background:var(--grey-bg);color:var(--grey);border-color:#d5dbe2;border-style:dashed}
-.mindmap-viewport{height:720px;overflow:auto;border:1px solid var(--line);border-radius:15px;background:#fff;position:relative;cursor:grab;box-shadow:0 7px 24px rgba(23,50,77,.045)}
-.mindmap-viewport.dragging{cursor:grabbing;user-select:none}
+.workspace-head{max-width:1560px;margin:0 auto 12px;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.workspace-title h2{font-size:19px;margin:0;font-weight:600}.workspace-title p{font-size:11.5px;color:var(--muted);margin:4px 0 0;max-width:900px;line-height:1.5}
+.mindmap-shell{position:relative;width:100vw;height:calc(100vh - 135px);min-height:680px;margin-left:calc(50% - 50vw);overflow:hidden;background:
+  radial-gradient(circle at 1px 1px,rgba(71,103,133,.12) 1px,transparent 1.2px) 0 0/26px 26px,
+  linear-gradient(180deg,#ffffff 0%,#fbfcfe 100%)}
+.mindmap-shell:fullscreen{width:100vw;height:100vh;min-height:100vh;margin:0;background:
+  radial-gradient(circle at 1px 1px,rgba(71,103,133,.12) 1px,transparent 1.2px) 0 0/26px 26px,
+  linear-gradient(180deg,#ffffff 0%,#fbfcfe 100%)}
+.mindmap-viewport{position:absolute;inset:0;overflow:auto;cursor:grab;overscroll-behavior:none;scrollbar-width:none;touch-action:none}
+.mindmap-viewport::-webkit-scrollbar{display:none}.mindmap-viewport.dragging{cursor:grabbing;user-select:none}
 .mindmap-scaler{position:relative;min-width:100%;min-height:100%}
 .mindmap-stage{position:absolute;left:0;top:0;transform-origin:top left}
 .connector-layer{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
 .connector{fill:none;stroke-width:2;opacity:.72}
 .connector.current,.connector.core{stroke:#8eb4dc}.connector.shared,.connector.supporting{stroke:#9fcbb8}.connector.refactor{stroke:#dfbf7c}.connector.planned,.connector.gap{stroke:#c7cdd4;stroke-dasharray:5 5}
 .node-layer{position:absolute;left:0;top:0}
-.map-node{position:absolute;width:218px;height:66px;border:1px solid var(--line);border-radius:12px;background:#fff;text-align:left;padding:10px 12px;box-shadow:0 4px 12px rgba(23,50,77,.055);display:flex;flex-direction:column;justify-content:center;overflow:hidden;transition:transform .14s ease,box-shadow .14s ease,border-color .14s ease}
+.map-node{position:absolute;width:218px;height:66px;border:1px solid var(--line);border-radius:12px;background:#fff;text-align:left;padding:10px 38px 10px 12px;box-shadow:0 4px 12px rgba(23,50,77,.055);display:flex;flex-direction:column;justify-content:center;overflow:visible;transition:transform .14s ease,box-shadow .14s ease,border-color .14s ease;cursor:pointer}
 .map-node:hover{transform:translateY(-2px);box-shadow:0 7px 17px rgba(23,50,77,.10);z-index:3}
+.map-node:focus-visible{outline:2px solid #6f9dcc;outline-offset:3px}
 .map-node .meta{display:block;font-size:8.5px;line-height:1;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;color:var(--muted);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .map-node .title{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font-size:12.5px;line-height:1.27;font-weight:600;color:var(--text)}
 .map-node.kind-capability .title{font-size:13px}.map-node.kind-skill .title{font-size:11.7px}
@@ -55,17 +58,19 @@ main{max-width:1560px;margin:0 auto;padding:26px 20px 50px}
 .map-node.status-refactor{background:var(--yellow-bg);border-color:#e6c989}.map-node.status-refactor .meta{color:var(--yellow)}
 .map-node.status-planned{background:var(--grey-bg);border-color:#cdd4dc}.map-node.status-planned .meta{color:var(--grey)}
 .map-node.status-gap{background:var(--grey-bg);border-color:#bfc7d0;border-style:dashed;box-shadow:none}.map-node.status-gap .meta{color:var(--grey)}
+.node-toggle{position:absolute;right:7px;top:50%;transform:translateY(-50%);width:24px;height:24px;border-radius:50%;padding:0;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;line-height:1;background:rgba(255,255,255,.85);border:1px solid rgba(112,134,156,.35);z-index:2}
+.node-toggle:hover{background:#fff;border-color:#8fa7bd}
 .root-node{position:absolute;width:246px;height:88px;border-radius:17px;background:var(--navy);color:#fff;padding:14px 17px;display:flex;flex-direction:column;justify-content:center;box-shadow:0 12px 30px rgba(23,50,77,.20);z-index:4}
 .root-node .meta{font-size:9px;letter-spacing:.10em;text-transform:uppercase;opacity:.7;font-weight:700;margin-bottom:6px}.root-node strong{font-size:18px;line-height:1.15}.root-node span{font-size:10.5px;opacity:.78;margin-top:5px}
-.map-empty{min-height:640px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px}
-.empty-workspace{min-height:340px;border:1px dashed #c6d1dd;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;text-align:center;padding:36px}
-.empty-workspace h2{margin:0 0 5px;font-size:20px}.empty-workspace p{margin:0;color:var(--muted);font-size:12px}
-.empty-folder-mark{position:relative;width:92px;height:60px;margin:0 auto 20px;background:#f1f4f8;border:1px solid #cbd5df;border-radius:7px}.empty-folder-mark::before{content:"";position:absolute;top:-15px;left:8px;width:40px;height:16px;background:#f1f4f8;border:1px solid #cbd5df;border-bottom:0;border-radius:6px 6px 0 0}
-.small-note{font-size:10.5px;color:var(--muted);margin-top:10px;line-height:1.5}
-dialog{width:min(650px,calc(100% - 26px));border:0;border-radius:15px;padding:0;box-shadow:0 25px 70px rgba(23,50,77,.24)}
-dialog::backdrop{background:rgba(17,30,45,.4)}
-.modal-head{padding:18px 20px 12px;border-bottom:1px solid #e2e8ef;display:flex;justify-content:space-between;gap:12px}.modal-head h2{margin:0;font-size:19px;font-weight:600}.modal-body{padding:18px 20px}.row{margin:0 0 13px}.row b{display:block;font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:#536c86;margin-bottom:4px}.row p{margin:0;color:#53677e;font-size:13px;line-height:1.5}.close{width:34px;height:34px;border-radius:50%;padding:0;font-size:18px}.row.hidden{display:none}
-@media(max-width:760px){header{position:static}.folder-grid{gap:12px}.platform-folder{width:calc(50% - 6px);min-width:145px;height:116px}.folder-copy{padding:16px 14px 13px}.mindmap-viewport{height:650px}.actions{width:100%;justify-content:flex-start}}
+.map-toolbar{position:absolute;right:20px;top:18px;z-index:12;display:flex;gap:7px;align-items:center;flex-wrap:wrap;padding:8px;background:rgba(255,255,255,.88);border:1px solid rgba(203,214,226,.82);border-radius:12px;box-shadow:0 8px 24px rgba(23,50,77,.08);backdrop-filter:blur(12px)}
+.map-toolbar button{background:rgba(255,255,255,.94);white-space:nowrap}.zoom-value{min-width:46px;text-align:center;color:var(--muted);font-size:10.5px}
+.map-key{position:absolute;left:20px;bottom:18px;z-index:12;display:flex;gap:7px;flex-wrap:wrap;max-width:calc(100% - 40px);padding:7px;background:rgba(255,255,255,.82);border:1px solid rgba(203,214,226,.72);border-radius:11px;box-shadow:0 7px 20px rgba(23,50,77,.05);backdrop-filter:blur(10px);font-size:10px}
+.pill{padding:4px 7px;border-radius:999px;border:1px solid var(--line);background:#fff}.pill.core{background:var(--blue-bg);color:var(--blue);border-color:#aac6e6}.pill.supporting{background:var(--green-bg);color:var(--green);border-color:#b9ddce}.pill.refactor{background:var(--yellow-bg);color:var(--yellow);border-color:#ead09a}.pill.gap{background:var(--grey-bg);color:var(--grey);border-color:#d5dbe2;border-style:dashed}
+.map-hint{position:absolute;left:20px;top:18px;z-index:11;color:#728397;font-size:10.5px;background:rgba(255,255,255,.72);padding:6px 9px;border-radius:8px;backdrop-filter:blur(8px);pointer-events:none}
+.map-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px}
+.empty-workspace{min-height:340px;border:1px dashed #c6d1dd;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;text-align:center;padding:36px}.empty-workspace h2{margin:0 0 5px;font-size:20px}.empty-workspace p{margin:0;color:var(--muted);font-size:12px}.empty-folder-mark{position:relative;width:92px;height:60px;margin:0 auto 20px;background:#f1f4f8;border:1px solid #cbd5df;border-radius:7px}.empty-folder-mark::before{content:"";position:absolute;top:-15px;left:8px;width:40px;height:16px;background:#f1f4f8;border:1px solid #cbd5df;border-bottom:0;border-radius:6px 6px 0 0}
+dialog{width:min(650px,calc(100% - 26px));border:0;border-radius:15px;padding:0;box-shadow:0 25px 70px rgba(23,50,77,.24)}dialog::backdrop{background:rgba(17,30,45,.4)}.modal-head{padding:18px 20px 12px;border-bottom:1px solid #e2e8ef;display:flex;justify-content:space-between;gap:12px}.modal-head h2{margin:0;font-size:19px;font-weight:600}.modal-body{padding:18px 20px}.row{margin:0 0 13px}.row b{display:block;font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:#536c86;margin-bottom:4px}.row p{margin:0;color:#53677e;font-size:13px;line-height:1.5}.close{width:34px;height:34px;border-radius:50%;padding:0;font-size:18px}.row.hidden{display:none}
+@media(max-width:760px){header{position:static}.folder-grid{gap:10px}.platform-folder{width:calc(50% - 5px);min-width:145px;height:108px}.folder-copy{padding:15px 13px 12px}.mindmap-shell{height:calc(100vh - 70px);min-height:620px}.map-toolbar{right:10px;top:10px;max-width:calc(100% - 20px);justify-content:flex-end}.map-key{left:10px;bottom:10px;max-width:calc(100% - 20px)}.map-hint{display:none}}
 </style>
 </head>
 <body>
@@ -74,14 +79,7 @@ dialog::backdrop{background:rgba(17,30,45,.4)}
     <div>
       <h1>ADME AI Operating System</h1>
       <div class="sub">Mind map of company workflows, AI skills, gaps and handoffs</div>
-      <div class="live-badge">Live architecture · v0.3</div>
-    </div>
-    <div class="actions" id="mapActions">
-      <button id="zoomOut" type="button">-</button>
-      <span class="zoom-value" id="zoomValue">75%</span>
-      <button id="zoomIn" type="button">+</button>
-      <button id="fitMap" type="button">Fit</button>
-      <button id="centerMap" type="button">Center</button>
+      <div class="live-badge">Live architecture · v0.4</div>
     </div>
   </div>
 </header>
@@ -100,24 +98,38 @@ dialog::backdrop{background:rgba(17,30,45,.4)}
     <div class="workspace-head">
       <div class="workspace-title">
         <h2>ChatGPT</h2>
-        <p>ADME's current capabilities are mapped together with logical grey placeholders for important company areas that have not yet been audited. Grey gap boxes reserve a place in the architecture. They do not automatically mean a new skill should be created.</p>
+        <p>Navigate the architecture as a live canvas. Drag to move, use the mouse wheel to zoom, and expand or collapse branches from the small control on each parent node.</p>
       </div>
     </div>
-    <div class="legend">
-      <span class="pill core">Blue = current or core</span>
-      <span class="pill supporting">Green = shared or supporting</span>
-      <span class="pill refactor">Yellow = overlap or refactor</span>
-      <span class="pill gap">Grey = planned or assumed gap</span>
-    </div>
-    <div class="mindmap-viewport" id="mindmapViewport">
-      <div class="mindmap-scaler" id="mindmapScaler">
-        <div class="mindmap-stage" id="mindmapStage">
-          <svg class="connector-layer" id="connectorLayer" aria-hidden="true"></svg>
-          <div class="node-layer" id="nodeLayer"></div>
+
+    <div class="mindmap-shell" id="mindmapShell">
+      <div class="mindmap-viewport" id="mindmapViewport">
+        <div class="mindmap-scaler" id="mindmapScaler">
+          <div class="mindmap-stage" id="mindmapStage">
+            <svg class="connector-layer" id="connectorLayer" aria-hidden="true"></svg>
+            <div class="node-layer" id="nodeLayer"></div>
+          </div>
         </div>
       </div>
+
+      <div class="map-hint">Drag to move · Wheel to zoom · Click a node for details</div>
+      <div class="map-toolbar" id="mapToolbar">
+        <button id="zoomOut" type="button" title="Zoom out">-</button>
+        <span class="zoom-value" id="zoomValue">75%</span>
+        <button id="zoomIn" type="button" title="Zoom in">+</button>
+        <button id="fitMap" type="button">Fit</button>
+        <button id="centerMap" type="button">Center</button>
+        <button id="expandAll" type="button">Expand all</button>
+        <button id="collapseAll" type="button">Collapse all</button>
+        <button id="fullscreenMap" type="button">Full screen</button>
+      </div>
+      <div class="map-key">
+        <span class="pill core">Blue = current or core</span>
+        <span class="pill supporting">Green = shared or supporting</span>
+        <span class="pill refactor">Yellow = overlap or refactor</span>
+        <span class="pill gap">Grey = planned or assumed gap</span>
+      </div>
     </div>
-    <p class="small-note">Architecture source: GitHub controlled <strong>architecture.json</strong>. Grey nodes are hypotheses for future workflow audits, not approved skill requirements.</p>
   </section>
 
   <section class="workspace" id="workspace-claude">
@@ -154,8 +166,8 @@ const LEVEL_GAP=48;
 const ROOT_GAP=92;
 const V_GAP=14;
 const BRANCH_GAP=34;
-const MARGIN_X=46;
-const MARGIN_Y=46;
+const MARGIN_X=90;
+const MARGIN_Y=90;
 let architecture=null;
 let hydratedBranches=[];
 let nodeCounter=0;
@@ -163,37 +175,24 @@ let canvasWidth=0;
 let canvasHeight=0;
 let rootBox=null;
 let zoom=.75;
+const collapsedNodes=new Set();
 
+const mapShell=document.getElementById('mindmapShell');
 const viewport=document.getElementById('mindmapViewport');
 const scaler=document.getElementById('mindmapScaler');
 const stage=document.getElementById('mindmapStage');
 const nodeLayer=document.getElementById('nodeLayer');
 const connectorLayer=document.getElementById('connectorLayer');
 
-function skillStatusClass(status){
-  return status||'current';
-}
+function skillStatusClass(status){return status||'current';}
 function statusLabel(status){
   return {
-    current:'Current mapped capability',
-    core:'Active core',
-    shared:'Cross-cutting shared capability',
-    supporting:'Supporting capability',
-    refactor:'Active, needs refactoring',
-    planned:'Planned or unavailable',
-    gap:'Assumed gap, not yet audited'
+    current:'Current mapped capability',core:'Active core',shared:'Cross-cutting shared capability',supporting:'Supporting capability',
+    refactor:'Active, needs refactoring',planned:'Planned or unavailable',gap:'Assumed gap, not yet audited'
   }[status]||status||'Current';
 }
 function typeLabel(kind){
-  return {
-    capability:'Capability area',
-    'cross-cutting':'Cross-cutting capability',
-    workflow:'Workflow or responsibility',
-    process:'Process block',
-    support:'Supporting capability',
-    skill:'Skill',
-    gap:'Gap placeholder'
-  }[kind]||'Architecture node';
+  return {capability:'Capability area','cross-cutting':'Cross-cutting capability',workflow:'Workflow or responsibility',process:'Process block',support:'Supporting capability',skill:'Skill',gap:'Gap placeholder'}[kind]||'Architecture node';
 }
 function nodeMeta(node){
   if(node.kind==='skill') return 'Skill';
@@ -205,34 +204,27 @@ function nodeMeta(node){
   if(node.kind==='support') return 'Shared support';
   return node.kind||'Workflow';
 }
-function hydrateNode(raw){
-  const uid='node-'+(++nodeCounter);
+function hydrateNode(raw,path){
+  const uid=path;
   if(raw.skill){
     const skill=architecture.skills[raw.skill];
-    return {
-      uid,
-      skillId:raw.skill,
-      name:skill?skill.name:raw.skill,
-      kind:'skill',
-      status:skill?skill.status:'planned',
-      description:skill?skill.does:'Skill details unavailable.',
-      where:skill?skill.where:'',
-      note:skill?skill.note:'',
-      children:[]
-    };
+    return {uid,skillId:raw.skill,name:skill?skill.name:raw.skill,kind:'skill',status:skill?skill.status:'planned',description:skill?skill.does:'Skill details unavailable.',where:skill?skill.where:'',note:skill?skill.note:'',children:[]};
   }
   const node={...raw,uid};
-  node.children=(raw.children||[]).map(hydrateNode);
+  node.children=(raw.children||[]).map((child,index)=>hydrateNode(child,`${path}.${index}`));
   return node;
 }
+function visibleChildren(node){return collapsedNodes.has(node.uid)?[]:(node.children||[]);}
 function subtreeHeight(node){
-  if(!node.children||node.children.length===0) return NODE_H;
-  const total=node.children.reduce((sum,child)=>sum+subtreeHeight(child),0)+V_GAP*(node.children.length-1);
+  const children=visibleChildren(node);
+  if(children.length===0) return NODE_H;
+  const total=children.reduce((sum,child)=>sum+subtreeHeight(child),0)+V_GAP*(children.length-1);
   return Math.max(NODE_H,total);
 }
 function maxDepth(node){
-  if(!node.children||node.children.length===0) return 1;
-  return 1+Math.max(...node.children.map(maxDepth));
+  const children=visibleChildren(node);
+  if(children.length===0) return 1;
+  return 1+Math.max(...children.map(maxDepth));
 }
 function sideTotal(branches){
   if(!branches.length) return 0;
@@ -242,10 +234,19 @@ function xFor(side,depth,rootX){
   if(side==='right') return rootX+ROOT_W+ROOT_GAP+(depth-1)*(NODE_W+LEVEL_GAP);
   return rootX-ROOT_GAP-depth*NODE_W-(depth-1)*LEVEL_GAP;
 }
-function renderMindMap(){
+function captureViewCenter(){
+  return {x:(viewport.scrollLeft+viewport.clientWidth/2)/zoom,y:(viewport.scrollTop+viewport.clientHeight/2)/zoom};
+}
+function restoreViewCenter(point){
+  if(!point) return;
+  viewport.scrollLeft=Math.max(0,point.x*zoom-viewport.clientWidth/2);
+  viewport.scrollTop=Math.max(0,point.y*zoom-viewport.clientHeight/2);
+}
+function renderMindMap(preserveView=false){
   if(!architecture) return;
+  const viewCenter=preserveView?captureViewCenter():null;
   nodeCounter=0;
-  hydratedBranches=architecture.branches.map(hydrateNode);
+  hydratedBranches=architecture.branches.map((branch,index)=>hydrateNode(branch,`branch.${index}`));
   const left=hydratedBranches.filter(b=>b.side==='left');
   const right=hydratedBranches.filter(b=>b.side!=='left');
   const leftDepth=left.length?Math.max(...left.map(maxDepth)):1;
@@ -273,15 +274,15 @@ function renderMindMap(){
   root.className='root-node';
   root.style.left=rootBox.x+'px';
   root.style.top=rootBox.y+'px';
-  root.innerHTML=`<span class="meta">Company</span><strong>${architecture.root.name}</strong><span>${architecture.root.subtitle}</span>`;
+  root.innerHTML=`<span class="meta">Company</span><strong>${escapeHtml(architecture.root.name)}</strong><span>${escapeHtml(architecture.root.subtitle)}</span>`;
   nodeLayer.appendChild(root);
 
   const leftStart=(canvasHeight-leftHeight)/2;
   const rightStart=(canvasHeight-rightHeight)/2;
   layoutSide(left,'left',leftStart,rootX);
   layoutSide(right,'right',rightStart,rootX);
-  applyZoom(false);
-  requestAnimationFrame(centerMap);
+  applyZoom();
+  requestAnimationFrame(()=>preserveView?restoreViewCenter(viewCenter):centerMap());
 }
 function layoutSide(branches,side,startY,rootX){
   let top=startY;
@@ -296,10 +297,11 @@ function layoutSubtree(node,side,depth,top,parentBox,rootX){
   const box={x:xFor(side,depth,rootX),y:top+h/2-NODE_H/2,w:NODE_W,h:NODE_H};
   drawConnector(parentBox,box,node.status);
   drawNode(node,box);
-  if(node.children&&node.children.length){
-    const childTotal=node.children.reduce((sum,child)=>sum+subtreeHeight(child),0)+V_GAP*(node.children.length-1);
+  const children=visibleChildren(node);
+  if(children.length){
+    const childTotal=children.reduce((sum,child)=>sum+subtreeHeight(child),0)+V_GAP*(children.length-1);
     let childTop=top+(h-childTotal)/2;
-    node.children.forEach(child=>{
+    children.forEach(child=>{
       const childH=subtreeHeight(child);
       layoutSubtree(child,side,depth+1,childTop,box,rootX);
       childTop+=childH+V_GAP;
@@ -319,13 +321,30 @@ function drawConnector(parent,child,status){
   connectorLayer.appendChild(path);
 }
 function drawNode(node,box){
-  const el=document.createElement('button');
-  el.type='button';
+  const el=document.createElement('div');
   el.className=`map-node kind-${node.kind||'workflow'} status-${skillStatusClass(node.status)}`;
   el.style.left=box.x+'px';
   el.style.top=box.y+'px';
+  el.setAttribute('role','button');
+  el.setAttribute('tabindex','0');
   el.innerHTML=`<span class="meta">${nodeMeta(node)}</span><span class="title">${escapeHtml(node.name)}</span>`;
   el.addEventListener('click',()=>showDetail(node));
+  el.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();showDetail(node);}});
+  if(node.children&&node.children.length){
+    const toggle=document.createElement('button');
+    toggle.type='button';
+    toggle.className='node-toggle';
+    const collapsed=collapsedNodes.has(node.uid);
+    toggle.textContent=collapsed?'+':'−';
+    toggle.title=collapsed?'Expand branch':'Collapse branch';
+    toggle.setAttribute('aria-label',toggle.title);
+    toggle.addEventListener('click',event=>{
+      event.stopPropagation();
+      if(collapsedNodes.has(node.uid)) collapsedNodes.delete(node.uid); else collapsedNodes.add(node.uid);
+      renderMindMap(true);
+    });
+    el.appendChild(toggle);
+  }
   nodeLayer.appendChild(el);
 }
 function escapeHtml(value){
@@ -347,12 +366,24 @@ function setOptionalRow(rowId,textId,value){
   document.getElementById(textId).textContent=value;
   row.classList.toggle('hidden',!value);
 }
-function applyZoom(updateValue=true){
+function applyZoom(){
   stage.style.transform=`scale(${zoom})`;
   scaler.style.width=Math.max(viewport.clientWidth,canvasWidth*zoom)+'px';
   scaler.style.height=Math.max(viewport.clientHeight,canvasHeight*zoom)+'px';
-  if(updateValue) document.getElementById('zoomValue').textContent=Math.round(zoom*100)+'%';
-  else document.getElementById('zoomValue').textContent=Math.round(zoom*100)+'%';
+  document.getElementById('zoomValue').textContent=Math.round(zoom*100)+'%';
+}
+function setZoom(newZoom,clientX=null,clientY=null){
+  const next=Math.max(.28,Math.min(1.45,newZoom));
+  if(next===zoom) return;
+  const rect=viewport.getBoundingClientRect();
+  const px=clientX===null?viewport.clientWidth/2:clientX-rect.left;
+  const py=clientY===null?viewport.clientHeight/2:clientY-rect.top;
+  const worldX=(viewport.scrollLeft+px)/zoom;
+  const worldY=(viewport.scrollTop+py)/zoom;
+  zoom=next;
+  applyZoom();
+  viewport.scrollLeft=Math.max(0,worldX*zoom-px);
+  viewport.scrollTop=Math.max(0,worldY*zoom-py);
 }
 function centerMap(){
   if(!rootBox) return;
@@ -363,11 +394,29 @@ function centerMap(){
 }
 function fitMap(){
   if(!canvasWidth||!canvasHeight) return;
-  const fitX=(viewport.clientWidth-26)/canvasWidth;
-  const fitY=(viewport.clientHeight-26)/canvasHeight;
-  zoom=Math.max(.38,Math.min(.9,fitX,fitY));
+  const fitX=(viewport.clientWidth-80)/canvasWidth;
+  const fitY=(viewport.clientHeight-80)/canvasHeight;
+  zoom=Math.max(.28,Math.min(.95,fitX,fitY));
   applyZoom();
   centerMap();
+}
+function collectExpandable(nodes,result=[]){
+  nodes.forEach(node=>{
+    if(node.children&&node.children.length){result.push(node.uid);collectExpandable(node.children,result);}
+  });
+  return result;
+}
+function expandAll(){collapsedNodes.clear();renderMindMap(true);}
+function collapseAll(){
+  const ids=collectExpandable(hydratedBranches,[]);
+  collapsedNodes.clear();
+  ids.forEach(id=>collapsedNodes.add(id));
+  renderMindMap(false);
+  requestAnimationFrame(fitMap);
+}
+async function toggleFullscreen(){
+  if(document.fullscreenElement===mapShell){await document.exitFullscreen();}
+  else if(mapShell.requestFullscreen){await mapShell.requestFullscreen();}
 }
 function switchWorkspace(name){
   document.querySelectorAll('.platform-folder').forEach(folder=>{
@@ -377,10 +426,8 @@ function switchWorkspace(name){
   });
   document.querySelectorAll('.workspace').forEach(space=>space.classList.remove('active'));
   document.getElementById(`workspace-${name}`).classList.add('active');
-  document.getElementById('mapActions').classList.toggle('hidden',name!=='chatgpt');
   if(name==='chatgpt') requestAnimationFrame(()=>{applyZoom();centerMap();});
 }
-
 async function loadArchitecture(){
   try{
     const response=await fetch('architecture.json',{cache:'no-store'});
@@ -394,22 +441,43 @@ async function loadArchitecture(){
 
 document.querySelectorAll('.platform-folder').forEach(folder=>folder.addEventListener('click',()=>switchWorkspace(folder.dataset.workspace)));
 document.getElementById('closeDialog').addEventListener('click',()=>document.getElementById('nodeDialog').close());
-document.getElementById('zoomIn').addEventListener('click',()=>{zoom=Math.min(1.25,zoom+.1);applyZoom();});
-document.getElementById('zoomOut').addEventListener('click',()=>{zoom=Math.max(.35,zoom-.1);applyZoom();});
+document.getElementById('zoomIn').addEventListener('click',()=>setZoom(zoom+.1));
+document.getElementById('zoomOut').addEventListener('click',()=>setZoom(zoom-.1));
 document.getElementById('fitMap').addEventListener('click',fitMap);
 document.getElementById('centerMap').addEventListener('click',centerMap);
+document.getElementById('expandAll').addEventListener('click',expandAll);
+document.getElementById('collapseAll').addEventListener('click',collapseAll);
+document.getElementById('fullscreenMap').addEventListener('click',toggleFullscreen);
 
-let dragging=false,startX=0,startY=0,startLeft=0,startTop=0;
-viewport.addEventListener('mousedown',event=>{
-  if(event.target.closest('.map-node')||event.target.closest('.root-node')) return;
-  dragging=true;viewport.classList.add('dragging');startX=event.clientX;startY=event.clientY;startLeft=viewport.scrollLeft;startTop=viewport.scrollTop;
+document.addEventListener('fullscreenchange',()=>{
+  const full=document.fullscreenElement===mapShell;
+  document.getElementById('fullscreenMap').textContent=full?'Exit full screen':'Full screen';
+  requestAnimationFrame(()=>{applyZoom();if(full) fitMap();});
 });
-window.addEventListener('mousemove',event=>{
-  if(!dragging) return;
+viewport.addEventListener('wheel',event=>{
+  event.preventDefault();
+  const factor=event.deltaY<0?1.09:.91;
+  setZoom(zoom*factor,event.clientX,event.clientY);
+},{passive:false});
+
+let dragging=false,startX=0,startY=0,startLeft=0,startTop=0,pointerId=null;
+viewport.addEventListener('pointerdown',event=>{
+  if(event.target.closest('.map-node')||event.target.closest('.map-toolbar')) return;
+  dragging=true;pointerId=event.pointerId;viewport.setPointerCapture(pointerId);viewport.classList.add('dragging');
+  startX=event.clientX;startY=event.clientY;startLeft=viewport.scrollLeft;startTop=viewport.scrollTop;
+});
+viewport.addEventListener('pointermove',event=>{
+  if(!dragging||event.pointerId!==pointerId) return;
   viewport.scrollLeft=startLeft-(event.clientX-startX);
   viewport.scrollTop=startTop-(event.clientY-startY);
 });
-window.addEventListener('mouseup',()=>{dragging=false;viewport.classList.remove('dragging');});
+function endDrag(event){
+  if(!dragging) return;
+  if(pointerId!==null&&viewport.hasPointerCapture(pointerId)) viewport.releasePointerCapture(pointerId);
+  dragging=false;pointerId=null;viewport.classList.remove('dragging');
+}
+viewport.addEventListener('pointerup',endDrag);
+viewport.addEventListener('pointercancel',endDrag);
 window.addEventListener('resize',()=>{if(architecture){applyZoom();}});
 
 loadArchitecture();
