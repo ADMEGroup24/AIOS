@@ -18,9 +18,26 @@ header{padding:28px 20px 16px;border-bottom:1px solid var(--line);background:#ff
 .header-inner{max-width:1220px;margin:auto;display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 h1{font-size:28px;margin:0}.sub{color:var(--muted);font-size:13px;margin-top:4px}.live-badge{display:inline-block;margin-top:8px;padding:4px 8px;border-radius:999px;background:var(--green-bg);color:var(--green);border:1px solid #b9ddce;font-size:11px;font-weight:700}
 .actions{display:flex;gap:8px;flex-wrap:wrap}
+.actions.hidden{display:none}
 button,.btn{border:1px solid var(--line);background:#fff;color:var(--text);padding:9px 12px;border-radius:9px;cursor:pointer;font-size:13px}
 button.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
-main{max-width:1220px;margin:0 auto;padding:22px 20px 50px}
+main{max-width:1220px;margin:0 auto;padding:28px 20px 50px}
+.folder-grid{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:28px}
+.platform-folder{position:relative;width:220px;height:138px;border:0;background:transparent;padding:18px 0 0;text-align:left;cursor:pointer}
+.platform-folder::before{content:"";position:absolute;top:0;left:14px;width:90px;height:30px;background:#e7edf5;border:1px solid #c8d3df;border-bottom:0;border-radius:10px 10px 0 0;transition:.18s ease}
+.platform-folder::after{content:"";position:absolute;top:18px;left:0;right:0;bottom:0;background:#f5f8fc;border:1px solid #c8d3df;border-radius:11px;box-shadow:0 5px 14px rgba(23,50,77,.06);transition:.18s ease}
+.platform-folder:hover::after{transform:translateY(-2px);box-shadow:0 8px 20px rgba(23,50,77,.09)}
+.platform-folder.active::before{background:var(--blue-bg);border-color:#a9c5e4}
+.platform-folder.active::after{background:#fff;border-color:#9bbce0;box-shadow:0 8px 22px rgba(47,111,179,.12)}
+.folder-copy{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;height:100%;padding:20px 20px 17px}
+.folder-copy strong{font-size:18px;font-weight:600}.folder-copy span{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4}
+.workspace{display:none}.workspace.active{display:block}
+.workspace-head{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.workspace-title h2{font-size:20px;margin:0}.workspace-title p{font-size:12px;color:var(--muted);margin:4px 0 0}
+.empty-workspace{min-height:300px;border:1px dashed #c6d1dd;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;text-align:center;padding:36px}
+.empty-workspace h2{margin:0 0 5px;font-size:20px}.empty-workspace p{margin:0;color:var(--muted);font-size:12px}
+.empty-folder-mark{position:relative;width:92px;height:60px;margin:0 auto 20px;background:#f1f4f8;border:1px solid #cbd5df;border-radius:7px}
+.empty-folder-mark::before{content:"";position:absolute;top:-15px;left:8px;width:40px;height:16px;background:#f1f4f8;border:1px solid #cbd5df;border-bottom:0;border-radius:6px 6px 0 0}
 .legend{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;font-size:12px}
 .pill{padding:5px 8px;border-radius:999px;border:1px solid var(--line)}
 .pill.core{background:var(--blue-bg);color:var(--blue)}
@@ -59,7 +76,7 @@ dialog::backdrop{background:rgba(17,30,45,.4)}
 .editor textarea{min-height:90px}.editor .full{grid-column:1/-1}
 .small-note{font-size:11px;color:var(--muted);margin-top:10px}
 @media(max-width:900px){.skill-grid{grid-template-columns:1fr 1fr}.flow{flex-direction:column}.block{width:100%;min-height:auto}.arrow{transform:rotate(90deg);height:22px;width:100%}}
-@media(max-width:620px){.skill-grid{grid-template-columns:1fr}.editor{grid-template-columns:1fr}.editor .full{grid-column:auto}}
+@media(max-width:620px){.folder-grid{gap:12px}.platform-folder{width:calc(50% - 6px);min-width:145px;height:118px}.folder-copy{padding:17px 15px 14px}.skill-grid{grid-template-columns:1fr}.editor{grid-template-columns:1fr}.editor .full{grid-column:auto}}
 </style>
 </head>
 <body>
@@ -70,7 +87,7 @@ dialog::backdrop{background:rgba(17,30,45,.4)}
       <div class="sub">Living map of company workflows, skills, gaps and handoffs</div>
       <div class="live-badge">Live architecture · v0.2</div>
     </div>
-    <div class="actions">
+    <div class="actions" id="architectureActions">
       <button id="addSkill">Add skill</button>
       <button id="exportData">Export JSON</button>
       <label class="btn">Import JSON<input id="importData" type="file" accept=".json" hidden></label>
@@ -80,14 +97,41 @@ dialog::backdrop{background:rgba(17,30,45,.4)}
 </header>
 
 <main>
-  <div class="legend">
-    <span class="pill core">Blue = active core</span>
-    <span class="pill supporting">Green = supporting</span>
-    <span class="pill planned">Grey = unavailable / planned</span>
-    <span class="pill refactor">Yellow = active, needs refactoring</span>
+  <div class="folder-grid" aria-label="AI platforms">
+    <button class="platform-folder active" type="button" data-workspace="chatgpt" aria-pressed="true">
+      <span class="folder-copy"><strong>ChatGPT</strong><span>Current workflows, skills and architecture</span></span>
+    </button>
+    <button class="platform-folder" type="button" data-workspace="claude" aria-pressed="false">
+      <span class="folder-copy"><strong>Claude</strong><span>Empty for now</span></span>
+    </button>
   </div>
-  <div id="app"></div>
-  <p class="small-note">MVP note: edits are saved in this browser. Export JSON to create a portable architecture backup. A shared database can replace browser storage later.</p>
+
+  <section class="workspace active" id="workspace-chatgpt">
+    <div class="workspace-head">
+      <div class="workspace-title">
+        <h2>ChatGPT</h2>
+        <p>ADME's current AI workflow and skill architecture.</p>
+      </div>
+    </div>
+    <div class="legend">
+      <span class="pill core">Blue = active core</span>
+      <span class="pill supporting">Green = supporting</span>
+      <span class="pill planned">Grey = unavailable / planned</span>
+      <span class="pill refactor">Yellow = active, needs refactoring</span>
+    </div>
+    <div id="app"></div>
+    <p class="small-note">MVP note: edits are saved in this browser. Export JSON to create a portable architecture backup. A shared database can replace browser storage later.</p>
+  </section>
+
+  <section class="workspace" id="workspace-claude">
+    <div class="empty-workspace">
+      <div>
+        <div class="empty-folder-mark" aria-hidden="true"></div>
+        <h2>Claude</h2>
+        <p>This folder is empty for now.</p>
+      </div>
+    </div>
+  </section>
 </main>
 
 <dialog id="skillDialog">
@@ -298,6 +342,19 @@ function showSkill(id){
   document.getElementById("detailNote").textContent=s.note||"";
   document.getElementById("skillDialog").showModal();
 }
+function switchWorkspace(name){
+  document.querySelectorAll(".platform-folder").forEach(folder=>{
+    const active=folder.dataset.workspace===name;
+    folder.classList.toggle("active",active);
+    folder.setAttribute("aria-pressed",active?"true":"false");
+  });
+  document.querySelectorAll(".workspace").forEach(space=>space.classList.remove("active"));
+  document.getElementById(`workspace-${name}`).classList.add("active");
+  document.getElementById("architectureActions").classList.toggle("hidden",name!=="chatgpt");
+}
+document.querySelectorAll(".platform-folder").forEach(folder=>{
+  folder.addEventListener("click",()=>switchWorkspace(folder.dataset.workspace));
+});
 document.getElementById("closeSkill").addEventListener("click",()=>document.getElementById("skillDialog").close());
 document.getElementById("addSkill").addEventListener("click",()=>{
   const sel=document.getElementById("categorySelect");
